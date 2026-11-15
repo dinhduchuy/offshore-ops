@@ -5,6 +5,10 @@ This product is a derivative of Diorama (diorama-builder)
   Copyright (c) 2026 Hitesh Goyal
   https://github.com/hitesh153/diorama-builder
   Licensed under the MIT License (see LICENSE).
+  Diorama is a general-purpose 3D workspace visualizer for AI agents; it is not
+  an oil and gas product. The offshore operations workflow, agents, layout and
+  data were added in this repository. The Diorama author is not involved in
+  and does not endorse Offshore Ops.
 
 It includes 3D models from the Kenney Furniture Kit
   by Kenney - https://kenney.nl/assets/furniture-kit

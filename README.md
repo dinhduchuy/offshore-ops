@@ -39,9 +39,11 @@ Operator guide (Vietnamese): [oilgas/OPS_GUIDE.md](oilgas/OPS_GUIDE.md) · n8n /
 
 ## Credits and sources
 
-**Built on Diorama.** Offshore Ops is a derivative of **[Diorama](https://github.com/hitesh153/diorama-builder)** by **Hitesh Goyal**, released under the MIT License. This repository starts from Diorama commit `98ebc60` (2026-07-07) and keeps its full commit history. The original copyright notice is in [LICENSE](LICENSE); keep it in any copy or fork.
+**Built on Diorama.** Offshore Ops is a derivative of **[Diorama](https://github.com/hitesh153/diorama-builder)** by **Hitesh Goyal**, released under the MIT License. Diorama is a general-purpose tool, not an oil and gas product: it lets developers build a 3D office for their AI coding agents (Claude Code, Codex CLI, OpenClaw gateways or any HTTP source) and watch them work. Everything offshore-specific in this repository was added on top of it: the workflow, the department agents, the approval and traceability model, the offshore layout and the simulated data. Hitesh Goyal is not involved in Offshore Ops, and nothing here implies his endorsement.
 
-| Reused from Diorama (and extended) | New in Offshore Ops |
+This repository starts from Diorama commit `98ebc60` (2026-07-07) and keeps its full commit history. The original copyright notice is in [LICENSE](LICENSE); keep it in any copy or fork.
+
+| Reused from Diorama (general-purpose, extended here) | New in Offshore Ops (offshore-specific) |
 |---|---|
 | 3D engine: room layout, door graph, BFS pathfinding, room matching | `packages/ops`: SQLite store, data intake, anomaly detection, case workflow, department agents, approval gates, traceability |
 | Event hub + SSE stream that drives the 3D world | `/ops` page: workflow board, task inspector, trace viewer, approvals, data, outbox, log |
@@ -61,6 +63,8 @@ Offshore Ops itself is released under the same MIT License.
 ---
 
 # Diorama, the engine underneath
+
+*The rest of this README is Diorama's own documentation: the general-purpose 3D agent-world tool Offshore Ops is built on. These features work for any agents, not only offshore ones.*
 
 **Build 3D worlds for your AI agents.** Design an office in a CAD-style
 editor (or ask the AI copilot to design it for you), connect the agent
