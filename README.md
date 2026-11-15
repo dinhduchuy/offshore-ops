@@ -1,10 +1,21 @@
 # Offshore Ops
 
-**What if every department on an offshore asset had an AI agent that picked up its part of the job, and every conclusion it reached came with a receipt?**
+**Offshore Ops** turns a production drop on an offshore well into a coordinated, traceable workflow, shown in a live 3D office.
 
-Offshore Ops is an open-source prototype that turns a production drop into a coordinated, traceable workflow inside a live 3D office. Load the daily production reports and it flags the anomaly, opens a case, and hands the work to Production Engineering, Maintenance, HSE, Contracts, Logistics and Finance agents in dependency order. When data is missing, the step stops and asks for it instead of guessing. Click any finding to follow it back to the calculation, the exact data row and the source file's SHA-256. Approvals stay human: the wrong role is refused, and each decision is bound to the exact package version that was reviewed. RFQs stay drafts and vessel seats stay internal holds until a person says otherwise.
+Department agents (Production Engineering, Maintenance, HSE, Contracts, Logistics, Finance) take their steps in order. When data is missing, they stop and ask for it. Every finding traces back to its calculation, the data row and the source file. People make the decisions.
 
-It runs locally on simulated data, with deterministic rules by default (Claude API optional), in English or Vietnamese. Clone it, start it, and watch the agents work the case. It's a prototype, so feedback is welcome: which coordination step costs your team the most time?
+Open-source prototype on simulated data. Rule-based by default, LLM optional. Built on [Diorama](https://github.com/hitesh153/diorama-builder) by Hitesh Goyal (MIT).
+
+<details>
+<summary>Tiếng Việt</summary>
+
+**Offshore Ops** biến một sự cố suy giảm sản lượng giếng offshore thành một quy trình phối hợp có truy vết, hiển thị trong văn phòng 3D trực quan.
+
+Các agent phòng ban (Kỹ thuật khai thác, Bảo dưỡng, HSE, Hợp đồng, Hậu cần, Tài chính) lần lượt nhận việc. Thiếu dữ liệu thì dừng lại hỏi. Mọi kết luận đều truy ngược được về phép tính, dòng dữ liệu và file gốc. Con người ra quyết định.
+
+Prototype mã nguồn mở, dùng dữ liệu giả lập. Mặc định chạy bằng quy tắc, LLM là tùy chọn. Xây dựng trên [Diorama](https://github.com/hitesh153/diorama-builder) của Hitesh Goyal (MIT).
+
+</details>
 
 ![Offshore Ops: tracing a 20% production drop back to its calculation, next to the live 3D office](docs/media/offshore-ops-trace.jpg)
 
