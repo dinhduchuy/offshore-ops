@@ -1,0 +1,8 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+contract_no,item_code,description,unit,rate_usd,applies_to
+SIM-C-2024-017,SL-01,Slickline unit & crew (4 người),day,6200,slickline_fgs
+SIM-C-2024-017,SL-02,Mob/demob slickline spread,lump sum,8500,slickline_fgs
+SIM-C-2024-017,SL-03,Thuê bộ đo áp suất/nhiệt độ,day,450,slickline_fgs
+SIM-C-2024-017,SL-04,Xử lý dữ liệu & báo cáo FGS,job,2200,slickline_fgs
+SIM-C-2024-017,SL-11,Memory gauges PBU,day,900,pbu_survey
+SIM-C-2025-044,LB-01,"Phân tích nước (2 mẫu: độ mặn, ion)",job,760,water_sampling

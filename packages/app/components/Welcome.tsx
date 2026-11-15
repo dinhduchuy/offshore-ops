@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useI18n } from "@/components/I18nProvider";
 
 /**
  * Home for first-time users (no saved office yet): explains the product
@@ -9,21 +10,21 @@ import { useRouter } from "next/navigation";
  * with one click.
  */
 
-const FEATURES: Array<{ glyph: string; title: string; body: string }> = [
+const FEATURES: Array<{ glyph: string; title: [string, string]; body: [string, string] }> = [
   {
     glyph: "▤",
-    title: "Design an office",
-    body: "Lay out rooms in a 2D/3D editor, or describe it and let the AI copilot build it.",
+    title: ["Thiết kế văn phòng", "Design an office"],
+    body: ["Dựng phòng trong trình chỉnh sửa 2D/3D, hoặc mô tả để AI copilot dựng giúp.", "Lay out rooms in a 2D/3D editor, or describe it and let the AI copilot build it."],
   },
   {
     glyph: "⇄",
-    title: "Connect your agents",
-    body: "Codex CLI, Claude Code, OpenClaw, or anything that can send one HTTP request.",
+    title: ["Kết nối agent", "Connect your agents"],
+    body: ["Codex CLI, Claude Code, OpenClaw, hoặc bất cứ thứ gì gửi được một yêu cầu HTTP.", "Codex CLI, Claude Code, OpenClaw, or anything that can send one HTTP request."],
   },
   {
     glyph: "◉",
-    title: "Watch them work",
-    body: "Agents sit, walk between rooms, and show what they're doing as events arrive.",
+    title: ["Xem họ làm việc", "Watch them work"],
+    body: ["Agent ngồi, đi giữa các phòng và hiển thị việc đang làm khi sự kiện tới.", "Agents sit, walk between rooms, and show what they're doing as events arrive."],
   },
 ];
 
@@ -49,6 +50,7 @@ const DEMO_CONFIG = {
 };
 
 export function Welcome() {
+  const { t, tr } = useI18n();
   const router = useRouter();
   const [detected, setDetected] = useState<string[]>([]);
   const [startingDemo, setStartingDemo] = useState(false);
@@ -82,16 +84,18 @@ export function Welcome() {
       <div style={{ maxWidth: 480, width: "100%", padding: "72px 24px 48px" }}>
         <div aria-hidden style={{ color: "var(--accent)", fontSize: 28, lineHeight: 1, marginBottom: 16 }}>◆</div>
         <h1 style={{ fontSize: 24, fontWeight: 650, margin: "0 0 8px", letterSpacing: "-0.015em" }}>
-          A 3D world for your AI agents
+          {tr("Thế giới 3D cho các agent AI của bạn", "A 3D world for your AI agents")}
         </h1>
         <p style={{ color: "var(--ink-2)", margin: "0 0 32px", maxWidth: "42ch" }}>
-          Diorama turns your invisible agents into little figures in an office you design:
-          live, on a screen you can glance at.
+          {tr(
+            "Offshore Ops biến các agent vô hình thành nhân vật trong văn phòng do bạn thiết kế — trực tiếp, trên một màn hình liếc là thấy.",
+            "Offshore Ops turns your invisible agents into little figures in an office you design: live, on a screen you can glance at.",
+          )}
         </p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 32 }}>
           {FEATURES.map((f) => (
-            <div key={f.title} style={{ display: "flex", gap: 14, padding: "10px 0", alignItems: "flex-start" }}>
+            <div key={f.glyph} style={{ display: "flex", gap: 14, padding: "10px 0", alignItems: "flex-start" }}>
               <span
                 aria-hidden
                 style={{
@@ -111,9 +115,9 @@ export function Welcome() {
                 {f.glyph}
               </span>
               <span>
-                <span style={{ display: "block", fontWeight: 550 }}>{f.title}</span>
+                <span style={{ display: "block", fontWeight: 550 }}>{tr(...f.title)}</span>
                 <span style={{ display: "block", fontSize: 12.5, color: "var(--ink-2)", marginTop: 1 }}>
-                  {f.body}
+                  {tr(...f.body)}
                 </span>
               </span>
             </div>
@@ -122,20 +126,20 @@ export function Welcome() {
 
         {detected.length > 0 && (
           <p style={{ fontSize: 12, color: "var(--ok)", margin: "0 0 20px" }}>
-            ✓ Found on this machine: {detected.join(" · ")}
+            ✓ {t("welcome.found")}: {detected.join(" · ")}
           </p>
         )}
 
         <div style={{ display: "flex", gap: 8 }}>
           <button onClick={() => router.push("/wizard")} className="dio-btn dio-btn-primary" style={{ flex: 1, height: 38 }}>
-            Design your office
+            {t("welcome.design")}
           </button>
           <button onClick={startDemo} disabled={startingDemo} className="dio-btn" style={{ height: 38 }}>
-            {startingDemo ? "Starting…" : "Try the demo"}
+            {startingDemo ? t("welcome.starting") : t("welcome.demo")}
           </button>
         </div>
         <p style={{ fontSize: 11.5, color: "var(--ink-3)", marginTop: 12 }}>
-          The demo opens a ready-made office with sample agents; you can redesign it any time.
+          {tr("Demo mở sẵn một văn phòng với agent mẫu; bạn có thể thiết kế lại bất cứ lúc nào.", "The demo opens a ready-made office with sample agents; you can redesign it any time.")}
         </p>
       </div>
     </div>

@@ -1,4 +1,47 @@
-# Diorama
+# Offshore Ops
+
+**What if every department on an offshore asset had an AI agent that picked up its part of the job, and every conclusion it reached came with a receipt?**
+
+Offshore Ops is an open-source prototype that turns a production drop into a coordinated, traceable workflow inside a live 3D office. Load the daily production reports and it flags the anomaly, opens a case, and hands the work to Production Engineering, Maintenance, HSE, Contracts, Logistics and Finance agents in dependency order. When data is missing, the step stops and asks for it instead of guessing. Click any finding to follow it back to the calculation, the exact data row and the source file's SHA-256. Approvals stay human: the wrong role is refused, and each decision is bound to the exact package version that was reviewed. RFQs stay drafts and vessel seats stay internal holds until a person says otherwise.
+
+It runs locally on simulated data, with deterministic rules by default (Claude API optional), in English or Vietnamese. Clone it, start it, and watch the agents work the case. It's a prototype, so feedback is welcome: which coordination step costs your team the most time?
+
+![Offshore Ops: tracing a 20% production drop back to its calculation, next to the live 3D office](docs/media/offshore-ops-trace.jpg)
+
+## Try it in five minutes
+
+Requires **Node.js ≥ 22.13** (the workflow store uses the built-in `node:sqlite`).
+
+```bash
+git clone https://github.com/dinhduchuy/offshore-ops && cd offshore-ops
+npm install
+export OPS_HOME="$PWD/oilgas/en"     # English data set + English agent output; omit for the Vietnamese set
+cd packages/app && npx next dev -p 3000
+```
+
+Open <http://localhost:3000/ops> and switch the top-right toggle to **EN**. Then:
+
+1. **Data** → **Load base set (19 files)**. The DPR check finds the drop on well A-03, opens a case, and the agents start in their rooms.
+2. **Workflow**. Production engineering stops on *Missing data*: the latest well test is too old. Go back to **Data** and **Load** the supplementary well test, and watch the flow continue to *Scope approval*.
+3. Open **DPR intake, data checks & case triage** and click an evidence chip such as **E7**. Follow it to the calculation, then **open →** the DPR row, then the import with its SHA-256.
+4. **Approvals** → **Scope approval** → **Record decision** as the default engineer. The server refuses. Pick *Demo · Head of Production Engineering* in the approver box and record the decision again.
+5. **Outbox**: a draft RFQ waiting for approval to send, plus internal holds on budget, flight seats and vessel deck space. Nothing is sent or booked.
+
+## What it is, and what it isn't
+
+- **A prototype on simulated data.** Every data set is labelled SIMULATED; thresholds and the authority matrix are sample configuration in `oilgas/*/ops-config.json`.
+- **Rules by default.** Agents run deterministic rules, and the top bar says so. A Claude API key can be added from **⚙ Claude API** for LLM-assisted reasoning; that is billed to your key and off until you configure it.
+- **Demo identities, no SSO.** Approvers are picked from a demo directory. `OPS_OPERATING_MODE=production` blocks approvals until enterprise sign-in exists.
+- **Nothing leaves your machine.** There is no outbound adapter: approving an RFQ only records the approval.
+- **Local state.** The workflow database is `~/.diorama/ops.db` (override with `OPS_DB_PATH`).
+
+Operator guide (Vietnamese): [oilgas/OPS_GUIDE.md](oilgas/OPS_GUIDE.md) · n8n / data integration: [oilgas/README.md](oilgas/README.md)
+
+Offshore Ops is built on **[Diorama](https://github.com/hitesh153/diorama-builder)** by Hitesh Goyal (MIT), the 3D agent-world engine described below.
+
+---
+
+# Diorama, the engine underneath
 
 **Build 3D worlds for your AI agents.** Design an office in a CAD-style
 editor (or ask the AI copilot to design it for you), connect the agent
@@ -10,10 +53,10 @@ Works today with **Codex CLI**, **Claude Code**, **OpenClaw gateways**, and
 
 ## Quick start (from source)
 
-> Not yet on npm — run from a checkout. Requires Node ≥ 20.
+> Not yet on npm — run from a checkout. Requires **Node ≥ 22.13** (the offshore-ops workflow uses the built-in `node:sqlite`).
 
 ```bash
-git clone https://github.com/hitesh153/diorama-builder && cd diorama-builder
+git clone https://github.com/dinhduchuy/offshore-ops && cd offshore-ops
 npm install
 cd packages/app && npx next dev -p 3456
 ```
@@ -118,8 +161,8 @@ npm run lint      # eslint
 npm run typecheck # tsc project references + app check
 ```
 
-CI runs lint + typecheck + tests + build on Node 20 and 22.
+CI runs lint + typecheck + tests + build on Node 22.13 (minimum) and 24.
 
 ## License
 
-MIT
+MIT. Original Diorama © 2026 Hitesh Goyal; see [LICENSE](LICENSE).

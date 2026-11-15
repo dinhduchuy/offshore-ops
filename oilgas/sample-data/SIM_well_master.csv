@@ -1,0 +1,8 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+well,platform,lift_type,status,reservoir,completion_date,allocation_method
+A-01,SIM-WHP-A,Gas lift,Producing,SIM-Res-M1,2019-01-15,allocated (well test)
+A-02,SIM-WHP-A,Gas lift,Producing,SIM-Res-M1,2019-02-15,allocated (well test)
+A-03,SIM-WHP-A,Gas lift,Producing,SIM-Res-M1,2019-03-15,allocated (well test)
+A-04,SIM-WHP-A,Natural flow,Producing,SIM-Res-M2,2019-04-15,allocated (well test)
+A-05,SIM-WHP-A,ESP,Producing,SIM-Res-M2,2019-05-15,allocated (well test)
+A-06,SIM-WHP-A,ESP,Producing,SIM-Res-M2,2019-06-15,allocated (well test)

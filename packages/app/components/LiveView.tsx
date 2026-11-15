@@ -20,6 +20,7 @@ import {
   formatEventLabel,
   resolveRoomFurniture,
   isSeatingItem,
+  seatAnchor,
   resolveSeatRef,
   matchRoomIndex,
   normalizeRoomName,
@@ -31,6 +32,9 @@ import {
   type FurnitureItem,
 } from "@diorama/engine";
 import { ActivityFeed, type FeedEntry } from "./ActivityFeed";
+import type { EventMsg } from "@/lib/i18n/events";
+import { localizedRoomName } from "@/lib/i18n/rooms";
+import { useI18n } from "@/components/I18nProvider";
 import type { AttentionEntry } from "@/hooks/useAttentionNotifications";
 
 const THEME_COLORS: Record<string, { accent: string; floor: string }> = {
@@ -59,17 +63,19 @@ function getRoomWorldCenter(room: { position: [number, number]; size: [number, n
 }
 
 /**
- * Get a seat position in world coordinates.
- * Furniture positions in presets are relative to room center.
+ * Get a seat position in world coordinates (x, seat height, z).
+ * Furniture positions are relative to room center; GLB models have their
+ * origin at a corner, so the seat point comes from seatAnchor().
  */
 function getSeatWorldPos(
   roomCenter: [number, number, number],
   furniture: FurnitureItem,
 ): [number, number, number] {
+  const a = seatAnchor(furniture);
   return [
-    roomCenter[0] + furniture.position[0],
-    0,
-    roomCenter[2] + furniture.position[2],
+    roomCenter[0] + furniture.position[0] + a.dx,
+    a.seatHeight,
+    roomCenter[2] + furniture.position[2] + a.dz,
   ];
 }
 
@@ -79,9 +85,33 @@ interface LiveViewProps {
   selectedRoom?: string | null;
   /** Reports the set of agents currently blocked waiting for the user. */
   onAttentionChange?: (entries: AttentionEntry[]) => void;
+  /** Click on an agent figure */
+  onSelectAgent?: (agentId: string) => void;
+  /** Display names for agent ids (falls back to the id) */
+  agentLabels?: Record<string, string>;
+  /** Restore after reload: agent id → room (zone id or label) it was last in. Read once at init. */
+  initialPlacement?: Record<string, string>;
+  /** Restore after reload: agent id → attention label. Read once at init. */
+  initialAttention?: Record<string, string>;
+  /**
+   * Controlled attention (agent id → label), e.g. projected from a database.
+   * When provided, events NEVER set/clear attention — only this prop does.
+   * When omitted (generic `/` office), the event-driven behavior is unchanged.
+   */
+  attentionState?: Record<string, string>;
+  /** Target room per agent; applied whenever placementVersion changes (e.g. after reconnect) */
+  placement?: Record<string, string>;
+  placementVersion?: number;
+  /** Hide the built-in connection badge (when the host page shows its own) */
+  hideStatusBadge?: boolean;
 }
 
-export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange }: LiveViewProps) {
+export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange, onSelectAgent, agentLabels, initialPlacement, initialAttention, attentionState, placement, placementVersion, hideStatusBadge }: LiveViewProps) {
+  const { t } = useI18n();
+  const controlledAttention = attentionState !== undefined;
+  const initialPlacementRef = useRef(initialPlacement);
+  const initialAttentionRef = useRef(initialAttention);
+  const seenEventIds = useRef<Set<string>>(new Set());
   const { eventBus, status, connect } = useGatewayEvents();
   const colors = THEME_COLORS[config.theme] ?? THEME_COLORS["neon-dark"];
 
@@ -144,7 +174,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
   const seatTakenRef = useRef<Set<string>>(new Set());
   const agentSeatRef = useRef<Map<string, string>>(new Map());
   const standCountRef = useRef<Map<number, number>>(new Map());
-  const pendingSeatRef = useRef<Map<string, { key: string; rotation: number } | null>>(new Map());
+  const pendingSeatRef = useRef<Map<string, { key: string; rotation: number; height: number | null } | null>>(new Map());
   const [, setModeVersion] = useState(0);
 
   const roomGraph = useMemo(() => buildRoomGraph(config.rooms, ROOM_PRESETS), [config.rooms]);
@@ -189,7 +219,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
   }, [attentionSnapshot, onAttentionChange]);
 
   // Placement helpers over the shared seat refs
-  type Placement = { x: number; z: number; seatRotation: number | null; seatKey: string | null };
+  type Placement = { x: number; z: number; seatRotation: number | null; seatHeight: number | null; seatKey: string | null };
 
   const takeSeat = useCallback((roomIdx: number, furnitureIndex: number): Placement | null => {
     const key = `${roomIdx}::${furnitureIndex}`;
@@ -197,7 +227,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
     const seat = seatPools.get(roomIdx)?.find((s) => s.furnitureIndex === furnitureIndex);
     if (!seat) return null;
     seatTakenRef.current.add(key);
-    return { x: seat.pos[0], z: seat.pos[2], seatRotation: seat.rotation, seatKey: key };
+    return { x: seat.pos[0], z: seat.pos[2], seatRotation: seat.rotation, seatHeight: seat.pos[1], seatKey: key };
   }, [seatPools]);
 
   const takeNextFreeSeat = useCallback((roomIdx: number): Placement | null => {
@@ -221,6 +251,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
       x: center[0] + Math.cos(angle) * radius,
       z: center[2] + Math.sin(angle) * radius,
       seatRotation: null,
+      seatHeight: null,
       seatKey: null,
     };
   }, [config.rooms]);
@@ -256,6 +287,22 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
       placements.set(agentId, placed);
     }
 
+    // Pass 3 (restore): agents whose last known room differs from their seat room
+    for (const [agentId, roomRef] of Object.entries(initialPlacementRef.current ?? {})) {
+      const current = placements.get(agentId);
+      const roomIdx = matchRoomIndex(config.rooms, roomRef);
+      if (!current || roomIdx < 0) continue;
+      if (findRoomContaining(config.rooms, current.x, current.z) === config.rooms[roomIdx].label) continue;
+      if (current.seatKey) seatTakenRef.current.delete(current.seatKey);
+      placements.set(agentId, takeNextFreeSeat(roomIdx) ?? standInRoom(roomIdx));
+    }
+    if (initialAttentionRef.current) {
+      for (const [agentId, label] of Object.entries(initialAttentionRef.current)) {
+        attentionRef.current.set(agentId, { since: Date.now(), label });
+      }
+      setAttentionSnapshot(new Map(attentionRef.current));
+    }
+
     const agents = agentEntries.map(([agentId, assignment], i) => {
       const placed = placements.get(agentId)!;
       const state = createAgentState({
@@ -266,6 +313,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
       if (placed.seatRotation !== null) {
         state.mode = "seated" as const;
         state.seatRotation = placed.seatRotation;
+        state.seatHeight = placed.seatHeight;
       }
       if (placed.seatKey) agentSeatRef.current.set(agentId, placed.seatKey);
       return {
@@ -287,12 +335,16 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
     const targetRoom = config.rooms[targetRoomIdx];
     if (!entry || !targetRoom) return;
     const st = entry.state;
-    if (st.mode === "walking") return; // already en route
+    const wasWalking = st.mode === "walking";
 
     const fromRoom = findRoomContaining(config.rooms, st.x, st.z);
-    if (fromRoom === targetRoom.label) return; // already there
+    // Already there (and not merely passing through en route elsewhere)
+    if (!wasWalking && fromRoom === targetRoom.label) return;
 
-    // Free the current seat
+    // Free the current seat (or the seat reserved at the end of an
+    // interrupted walk — a newer event re-routes the agent immediately
+    // instead of being dropped).
+    pendingSeatRef.current.delete(agentId);
     const currentSeat = agentSeatRef.current.get(agentId);
     if (currentSeat) {
       seatTakenRef.current.delete(currentSeat);
@@ -303,7 +355,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
     const placed = takeNextFreeSeat(targetRoomIdx) ?? standInRoom(targetRoomIdx);
     pendingSeatRef.current.set(
       agentId,
-      placed.seatKey ? { key: placed.seatKey, rotation: placed.seatRotation ?? 0 } : null,
+      placed.seatKey ? { key: placed.seatKey, rotation: placed.seatRotation ?? 0, height: placed.seatHeight } : null,
     );
     if (placed.seatKey) agentSeatRef.current.set(agentId, placed.seatKey);
 
@@ -317,7 +369,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
     }
     if (waypoints.length === 0) waypoints = [[placed.x, 0, placed.z]];
 
-    Object.assign(st, updateAgentState({ ...st, mode: "idle", seatRotation: null }, { type: "SET_PATH", path: waypoints }));
+    Object.assign(st, updateAgentState({ ...st, mode: "idle", seatRotation: null, seatHeight: null }, { type: "SET_PATH", path: waypoints }));
     setModeVersion((v) => v + 1);
   }, [agentSnapshot, config.rooms, roomGraph, takeNextFreeSeat, standInRoom]);
 
@@ -342,7 +394,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
           const pending = pendingSeatRef.current.get(entry.id);
           pendingSeatRef.current.delete(entry.id);
           if (pending) {
-            Object.assign(st, updateAgentState(st, { type: "SIT", seatRotation: pending.rotation }));
+            Object.assign(st, updateAgentState(st, { type: "SIT", seatRotation: pending.rotation, seatHeight: pending.height }));
           }
           modeChanged = true;
         }
@@ -377,6 +429,13 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
 
   // Handle events — activity + glow only, no movement
   const handleEvent = useCallback((event: DioramaEvent) => {
+    // Drop duplicate deliveries of the same event (eventId in payload)
+    const eventId = (event.payload as { eventId?: string } | null)?.eventId;
+    if (eventId) {
+      if (seenEventIds.current.has(eventId)) return;
+      seenEventIds.current.add(eventId);
+      if (seenEventIds.current.size > 2000) seenEventIds.current = new Set([...seenEventIds.current].slice(-1000));
+    }
     // Glow the matching room; unknown rooms glow nothing (feed still records)
     if (event.room) {
       const roomIdx = matchRoomIndex(config.rooms, event.room);
@@ -433,15 +492,32 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
     // Set activity
     const activity = deriveActivity(event.type, preset);
     const customLabel = (event.payload as { label?: string } | null)?.label;
+    const serverMsg = (event.payload as { msg?: EventMsg } | null)?.msg;
     const label = customLabel
-      ? `${event.agent} ${customLabel}`
+      ? `${agentLabels?.[event.agent] ?? event.agent} ${customLabel}`
       : formatEventLabel(event.type, event.agent, event.room || (targetRoom?.label ?? ""), preset);
+    // Generic activity lines are built from keys so they follow the interface language
+    const msg: EventMsg | undefined = customLabel
+      ? serverMsg
+      : {
+          key: "ev.generic",
+          params: {
+            agent: agentLabels?.[event.agent] ?? event.agent,
+            activity,
+            room: targetRoom ? localizedRoomName(targetRoom, "vi") : event.room || "",
+            room_en: targetRoom ? localizedRoomName(targetRoom, "en") : event.room || "",
+          },
+        };
 
     // Attention: requested sets it; anything else from the agent clears it.
-    if (event.type === "attention.requested") {
+    // In controlled mode the database projection (attentionState) is the only source.
+    if (controlledAttention) {
+      // no-op: attention follows attentionState
+    } else if (event.type === "attention.requested") {
       attentionRef.current.set(agentId, {
         since: event.timestamp ?? Date.now(),
-        label: customLabel ?? "needs you",
+        // empty → the 3D pill shows the localized "needs you"
+        label: customLabel ?? "",
       });
       setAttentionSnapshot(new Map(attentionRef.current));
     } else if (attentionRef.current.delete(agentId)) {
@@ -461,8 +537,12 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
     const agentColor = agentSnapshot.find((a) => a.id === agentId)?.color ?? "#8090c0";
     setFeedEntries((prev) => {
       const entry: FeedEntry = {
-        id: `${Date.now()}-${agentId}`,
+        // Unique even when several events arrive in the same millisecond
+        id: eventId ?? `${Date.now()}-${agentId}-${Math.random().toString(36).slice(2, 8)}`,
         label,
+        msg,
+        agentName: agentLabels?.[event.agent] ?? event.agent,
+        labelLang: customLabel ? "vi" : undefined,
         agentColor,
         timestamp: Date.now(),
         activity,
@@ -471,7 +551,33 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
       const next = [...prev, entry];
       return next.length > 15 ? next.slice(-15) : next;
     });
-  }, [config, agentSnapshot]);
+  }, [config, agentSnapshot, agentLabels, controlledAttention]);
+
+  // Controlled attention: mirror the prop (keeps "since" for unchanged entries)
+  const attentionKey = attentionState ? JSON.stringify(attentionState) : null;
+  useEffect(() => {
+    if (!attentionState) return;
+    const next = new Map<string, { since: number; label: string }>();
+    for (const [agentId, label] of Object.entries(attentionState)) {
+      const prev = attentionRef.current.get(agentId);
+      next.set(agentId, { since: prev?.since ?? Date.now(), label });
+    }
+    attentionRef.current = next;
+    setAttentionSnapshot(new Map(next));
+  }, [attentionKey]);
+
+  // Re-sync positions to the authoritative placement (after reconnect / missed events)
+  useEffect(() => {
+    if (!placement || !placementVersion) return;
+    for (const entry of agentSnapshot) {
+      const target = placement[entry.id];
+      if (!target || entry.state.mode === "walking") continue;
+      const idx = matchRoomIndex(config.rooms, target);
+      if (idx < 0) continue;
+      if (findRoomContaining(config.rooms, entry.state.x, entry.state.z) === config.rooms[idx].label) continue;
+      walkAgentToRef.current(entry.id, idx);
+    }
+  }, [placementVersion]);
 
   // Subscribe to events
   useEffect(() => {
@@ -502,7 +608,7 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
   return (
     <div style={{ width: "100%", height: "100%", position: "relative" }}>
       {/* Connection status badge */}
-      <div
+      {!hideStatusBadge && <div
         style={{
           position: "absolute",
           top: 12,
@@ -535,15 +641,15 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
           }}
         />
         {isDemoMode
-          ? "Demo"
+          ? t("live.badge.demo")
           : !hasGateway
-            ? `Live · ${localSources.filter((s) => s !== "ingest").join(" + ") || "ingest"}`
+            ? `${t("live.badge.live")} · ${localSources.filter((s) => s !== "ingest").join(" + ") || "ingest"}`
             : status === "connected"
-              ? "Live"
+              ? t("live.badge.live")
               : status === "connecting"
-                ? "Connecting..."
-                : "Disconnected"}
-      </div>
+                ? t("live.badge.connecting")
+                : t("live.badge.disconnected")}
+      </div>}
 
       {/* Activity feed */}
       <ActivityFeed entries={feedEntries} />
@@ -566,7 +672,8 @@ export function LiveView({ config, onSelectRoom, selectedRoom, onAttentionChange
             key={agent.id}
             state={agent.state}
             color={agent.color}
-            label={agent.id}
+            label={agentLabels?.[agent.id] ?? agent.id}
+            onClick={onSelectAgent ? () => onSelectAgent(agent.id) : undefined}
             phase={i * 3.7}
             energy={agent.energy}
             activity={activitySnapshot.get(agent.id)?.activity ?? "idle"}

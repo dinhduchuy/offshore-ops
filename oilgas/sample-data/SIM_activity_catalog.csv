@@ -1,0 +1,9 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+activity_type,name,work_type,lift_types,addresses,discipline,crew_size,duration_days,equipment,materials,contract_category,cost_code
+well_test_rerun,Thử giếng lặp lại trên bình tách thử,diagnostic,,H_MEAS,Production,0,1,,,,OPX-PRD-WELLTEST
+slickline_fgs,Khảo sát gradient dòng chảy (FGS) bằng slickline,diagnostic,Gas lift,H_GL,Production,4,2,SLICKLINE-UNIT;PRESSURE-GAUGE-KIT,SL-CONSUMABLES-KIT:1,slickline,OPX-WS-DIAG
+water_sampling,Lấy mẫu nước phân tích độ mặn/ion,diagnostic,,H_WATER,Production,0,1,,WATER-SAMPLE-KIT:2,lab_analysis,OPX-PRD-LAB
+pbu_survey,Khảo sát khôi phục áp suất (PBU) & phân tích PTA,diagnostic,,H_SKIN,Reservoir,4,4,SLICKLINE-UNIT;MEMORY-GAUGES,SL-CONSUMABLES-KIT:1,slickline,OPX-WS-DIAG
+gl_fcv_inspection,Kiểm tra & hiệu chỉnh van điều khiển khí gas lift bề mặt (FCV),maintenance,Gas lift,H_GL,Maintenance,0,1,,FCV-TRIM-KIT-2IN:1,,OPX-MNT-TOPS
+meter_calibration,Hiệu chuẩn đồng hồ đo bình tách thử,maintenance,,H_MEAS,Maintenance,1,1,,,metering_services,OPX-MNT-METER
+esp_diagnostics,"Chẩn đoán ESP (VSD log, cách điện)",diagnostic,ESP,H_ESP,Production,2,1,,,,OPX-PRD-ESP

@@ -7,6 +7,8 @@ import { AgentBehaviorStep, type AgentBehavior } from "@/components/wizard/Agent
 import { LaunchStep } from "@/components/wizard/LaunchStep";
 import type { RoomConfig, SourceConfig } from "@diorama/engine";
 import { TopBar } from "@/components/TopBar";
+import { I18nProvider, useI18n } from "@/components/I18nProvider";
+import type { MessageKey } from "@/lib/i18n/messages";
 
 const BuildStep = dynamic(
   () => import("@/components/wizard/BuildStep").then((m) => ({ default: m.BuildStep })),
@@ -39,7 +41,10 @@ interface WizardState {
   agentBehaviors: Record<string, AgentBehavior>;
 }
 
+const STEP_KEY: Record<number, MessageKey> = { 1: "wizard.step.connect", 2: "wizard.step.build", 3: "wizard.step.agents", 4: "wizard.step.launch" };
+
 function Stepper({ current }: { current: Step }) {
+  const { t } = useI18n();
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
       {STEPS.map((step, i) => {
@@ -83,7 +88,7 @@ function Stepper({ current }: { current: Step }) {
                   color: state === "current" ? "var(--ink)" : state === "done" ? "var(--ink-2)" : "var(--ink-3)",
                 }}
               >
-                {step.label}
+                {STEP_KEY[step.n] ? t(STEP_KEY[step.n]) : step.label}
               </span>
             </div>
             {i < STEPS.length - 1 && (
@@ -104,6 +109,15 @@ function Stepper({ current }: { current: Step }) {
 }
 
 export default function WizardPage() {
+  return (
+    <I18nProvider>
+      <WizardInner />
+    </I18nProvider>
+  );
+}
+
+function WizardInner() {
+  const { tr } = useI18n();
   const [step, setStep] = useState<Step>(1);
   const [state, setState] = useState<WizardState>({
     gatewayUrl: "",
@@ -123,7 +137,7 @@ export default function WizardPage() {
         center={<Stepper current={step} />}
         actions={
           <span style={{ fontSize: 12, color: "var(--ink-3)" }}>
-            {step === 2 ? "Saved to your config on launch" : ""}
+            {step === 2 ? tr("Lưu vào cấu hình khi khởi chạy", "Saved to your config on launch") : ""}
           </span>
         }
       />

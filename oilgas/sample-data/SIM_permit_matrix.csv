@@ -1,0 +1,8 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+activity_type,permit_type,required_documents
+slickline_fgs,Giấy phép can thiệp giếng (Well intervention PTW),risk_assessment;jsa;well_barrier_schematic;simops_plan
+pbu_survey,Giấy phép can thiệp giếng (Well intervention PTW),risk_assessment;jsa;well_barrier_schematic;simops_plan
+water_sampling,Giấy phép công việc nguội (Cold work PTW),jsa
+gl_fcv_inspection,Giấy phép công việc nguội + chứng nhận cô lập,risk_assessment;jsa;isolation_plan
+well_test_rerun,Giấy phép công việc nguội (Cold work PTW),jsa
+meter_calibration,Giấy phép công việc nguội (Cold work PTW),jsa

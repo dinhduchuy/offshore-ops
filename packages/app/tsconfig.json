@@ -42,16 +42,30 @@
       ],
       "@diorama/ui/*": [
         "../ui/src/*"
+      ],
+      "@diorama/ops": [
+        "../ops/src"
+      ],
+      "@diorama/ops/*": [
+        "../ops/src/*"
       ]
     },
     "allowJs": true,
     "noEmit": true
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next-buildcheck/types/**/*.ts",
+    ".next-demo/types/**/*.ts",
+    ".next-llmcheck/types/**/*.ts",
+    ".next-llmui/types/**/*.ts",
+    ".next-office/types/**/*.ts",
+    ".next-verify/types/**/*.ts",
+    ".next-wf/types/**/*.ts",
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    ".next-demo-en/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

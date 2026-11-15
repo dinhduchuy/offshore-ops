@@ -65,7 +65,11 @@ export function buildRoomGraph(
 
   for (const room of rooms) {
     const preset = presetMap.get(room.preset);
-    const relDoors = preset?.doors ?? [{ rx: 0.5, ry: 1.0, facing: 180 }]; // fallback: south center
+    // Explicit per-room doors win over the preset's; fallback: south center
+    const relDoors =
+      room.doors && room.doors.length > 0
+        ? room.doors
+        : preset?.doors ?? [{ rx: 0.5, ry: 1.0, facing: 180 }];
     const doors = resolveRoomDoors(room, relDoors);
 
     const canvasCenterX = (room.position[0] + room.size[0] / 2) * GRID_UNIT;

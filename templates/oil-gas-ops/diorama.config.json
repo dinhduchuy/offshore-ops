@@ -1,0 +1,3697 @@
+{
+  "name": "Offshore Ops — AI Agent Coordination",
+  "gateway": {
+    "url": "",
+    "token": ""
+  },
+  "view": "3d-office",
+  "theme": "neon-dark",
+  "sources": [
+    {
+      "type": "ingest"
+    }
+  ],
+  "rooms": [
+    {
+      "preset": "workspace",
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "label": "Operations · zone_ops",
+      "displayName": "Điều hành khai thác",
+      "displayNames": {
+        "vi": "Điều hành khai thác",
+        "en": "Operations"
+      },
+      "colors": {
+        "accent": "#22c55e"
+      },
+      "floorStyle": "grid-tiles",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 1,
+          "facing": 180
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            0.215,
+            0.0,
+            -1.651
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.399,
+            0.0,
+            -1.014
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -4.385,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            4.814,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -5.061,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -5.063,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -4.643,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            4.138,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.136,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.556,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            -1.76
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.673,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.254,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.166,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            2.9,
+            1.5,
+            0.08
+          ],
+          "position": [
+            -4.65,
+            1.55,
+            -5.25
+          ],
+          "label": "Video wall · Sản lượng dầu (bopd)",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#22c55e"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            2.9,
+            1.5,
+            0.08
+          ],
+          "position": [
+            -1.55,
+            1.55,
+            -5.25
+          ],
+          "label": "Video wall · Áp suất đầu giếng",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#38bdf8"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            2.9,
+            1.5,
+            0.08
+          ],
+          "position": [
+            1.55,
+            1.55,
+            -5.25
+          ],
+          "label": "Video wall · Water cut / GOR",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#f59e0b"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            2.9,
+            1.5,
+            0.08
+          ],
+          "position": [
+            4.65,
+            1.55,
+            -5.25
+          ],
+          "label": "Video wall · SCADA alarms",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#ef4444"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.6,
+            1.8,
+            0.8
+          ],
+          "position": [
+            -6.7,
+            0.9,
+            4.0
+          ],
+          "label": "SCADA server rack",
+          "material": {
+            "color": "#1f2937",
+            "emissive": "#22c55e"
+          }
+        }
+      ]
+    },
+    {
+      "preset": "lab",
+      "position": [
+        4,
+        0
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "label": "Production/Subsurface · zone_prod_eng",
+      "displayName": "Kỹ thuật khai thác",
+      "displayNames": {
+        "vi": "Kỹ thuật khai thác",
+        "en": "Production Engineering"
+      },
+      "colors": {
+        "accent": "#38bdf8"
+      },
+      "floorStyle": "grid-tiles",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 1,
+          "facing": 180
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            0.215,
+            0.0,
+            -1.651
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.399,
+            0.0,
+            -1.014
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -4.385,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            4.814,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -5.061,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -5.063,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -4.643,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            4.138,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.136,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.556,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            -1.76
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.673,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.254,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.166,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.6,
+            1.6,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            -5.25
+          ],
+          "label": "Well performance & reservoir model",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#38bdf8"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            1.4,
+            0.5,
+            0.9
+          ],
+          "position": [
+            -3.0,
+            0.85,
+            2.6
+          ],
+          "label": "Mô hình vỉa 3D (hologram)",
+          "material": {
+            "color": "#0ea5e9",
+            "emissive": "#38bdf8",
+            "opacity": 0.45
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            1.8,
+            0.5,
+            1.2
+          ],
+          "position": [
+            -3.0,
+            0.25,
+            2.6
+          ],
+          "label": "Bàn trưng bày",
+          "material": {
+            "color": "#1e293b"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "lab",
+      "position": [
+        8,
+        0
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "label": "Maintenance & Reliability · zone_maint",
+      "displayName": "Bảo dưỡng",
+      "displayNames": {
+        "vi": "Bảo dưỡng",
+        "en": "Maintenance & Reliability"
+      },
+      "colors": {
+        "accent": "#f97316"
+      },
+      "floorStyle": "grid-tiles",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 1,
+          "facing": 180
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            0.215,
+            0.0,
+            -1.651
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.399,
+            0.0,
+            -1.014
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -4.385,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            4.814,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -5.061,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -5.063,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -4.643,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            4.138,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.136,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.556,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            -1.76
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.673,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.254,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.166,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.6,
+            1.6,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            -5.25
+          ],
+          "label": "CMMS · work orders",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#f97316"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.6,
+            1.8,
+            2.4
+          ],
+          "position": [
+            6.6,
+            0.9,
+            2.2
+          ],
+          "label": "Giá phụ tùng",
+          "material": {
+            "color": "#334155"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            2.0,
+            0.9,
+            0.8
+          ],
+          "position": [
+            -4.6,
+            0.45,
+            2.6
+          ],
+          "label": "Bàn thao tác",
+          "material": {
+            "color": "#475569"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "lab",
+      "position": [
+        12,
+        0
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "label": "HSE · zone_hse",
+      "displayName": "HSE",
+      "displayNames": {
+        "vi": "HSE",
+        "en": "HSE"
+      },
+      "colors": {
+        "accent": "#eab308"
+      },
+      "floorStyle": "hex-tiles",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 1,
+          "facing": 180
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            0.215,
+            0.0,
+            -1.651
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.399,
+            0.0,
+            -1.014
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -4.385,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            4.814,
+            0.0,
+            -1.252
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Second chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -5.061,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -5.063,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -4.643,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            4.138,
+            0.0,
+            -1.36
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.136,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            4.556,
+            0.494,
+            -1.673
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            -1.76
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.673,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            -0.254,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.166,
+            0.494,
+            -2.073
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.6,
+            1.6,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            -5.25
+          ],
+          "label": "Permit to Work board",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#eab308"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.6,
+            1.8,
+            1.6
+          ],
+          "position": [
+            6.6,
+            0.9,
+            2.2
+          ],
+          "label": "Tủ PPE",
+          "material": {
+            "color": "#854d0e",
+            "emissive": "#eab308"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -6.7,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "social",
+      "position": [
+        0,
+        3
+      ],
+      "size": [
+        16,
+        1
+      ],
+      "label": "Hành lang trung tâm",
+      "displayName": "Hành lang trung tâm",
+      "displayNames": {
+        "vi": "Hành lang trung tâm",
+        "en": "Central Corridor"
+      },
+      "colors": {
+        "accent": "#64748b",
+        "floor": "#3b4a5f"
+      },
+      "floorStyle": "solid",
+      "doors": [
+        {
+          "rx": 0.125,
+          "ry": 0,
+          "facing": 0
+        },
+        {
+          "rx": 0.375,
+          "ry": 0,
+          "facing": 0
+        },
+        {
+          "rx": 0.625,
+          "ry": 0,
+          "facing": 0
+        },
+        {
+          "rx": 0.875,
+          "ry": 0,
+          "facing": 0
+        },
+        {
+          "rx": 0.125,
+          "ry": 1,
+          "facing": 180
+        },
+        {
+          "rx": 0.344,
+          "ry": 1,
+          "facing": 180
+        },
+        {
+          "rx": 0.531,
+          "ry": 1,
+          "facing": 180
+        },
+        {
+          "rx": 0.719,
+          "ry": 1,
+          "facing": 180
+        },
+        {
+          "rx": 0.906,
+          "ry": 1,
+          "facing": 180
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -28.3,
+            0.0,
+            -1.3
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -28.3,
+            0.0,
+            1.3
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            28.3,
+            0.0,
+            -1.3
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            28.3,
+            0.0,
+            1.3
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "meeting",
+      "position": [
+        0,
+        4
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "label": "Phòng họp kỹ thuật · zone_war_room",
+      "displayName": "Phòng họp kỹ thuật",
+      "displayNames": {
+        "vi": "Phòng họp kỹ thuật",
+        "en": "Engineering War Room"
+      },
+      "colors": {
+        "accent": "#f8fafc"
+      },
+      "floorStyle": "carpet",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 0,
+          "facing": 0
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            -1.73,
+            0.0,
+            -0.22
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            -0.13,
+            0.0,
+            -0.22
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            1.47,
+            0.0,
+            -0.22
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            -2.77,
+            0.0,
+            1.13
+          ],
+          "rotation": [
+            0,
+            1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            2.77,
+            0.0,
+            0.87
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            -1.47,
+            0.0,
+            2.22
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            0.13,
+            0.0,
+            2.22
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.26,
+            0.611,
+            0.26
+          ],
+          "position": [
+            1.73,
+            0.0,
+            2.22
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chair.glb",
+          "glbScale": 1.3,
+          "label": "Meeting chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            4.6,
+            0.08,
+            1.9
+          ],
+          "position": [
+            0,
+            0.56,
+            1.0
+          ],
+          "label": "Bàn họp lớn",
+          "material": {
+            "color": "#3b2a1e"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.6,
+            0.52,
+            0.7
+          ],
+          "position": [
+            0,
+            0.26,
+            1.0
+          ],
+          "label": "Bàn họp (chân)",
+          "material": {
+            "color": "#2a1d15"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            4.4,
+            2.0,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            5.25
+          ],
+          "label": "Màn hình trình chiếu",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#60a5fa"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.08,
+            1.1,
+            2.4
+          ],
+          "position": [
+            -7.05,
+            1.4,
+            0.8
+          ],
+          "label": "Bảng workflow",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#22c55e"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -6.7,
+            0.0,
+            -4.8
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            6.7,
+            0.0,
+            -4.8
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "private",
+      "position": [
+        4,
+        4
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "label": "Contracts & Procurement · zone_contracts",
+      "displayName": "Hợp đồng & Mua sắm",
+      "displayNames": {
+        "vi": "Hợp đồng & Mua sắm",
+        "en": "Contracts & Procurement"
+      },
+      "colors": {
+        "accent": "#a78bfa"
+      },
+      "floorStyle": "wood-planks",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 0,
+          "facing": 0
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -0.215,
+            0.0,
+            1.651
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.298,
+            0.0,
+            0.685
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            2.24
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.044,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.464,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.2,
+            1.5,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            5.25
+          ],
+          "label": "Contracts & RFQ tracker",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#a78bfa"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.86
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.11
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -0.36
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -4.9,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            4.9,
+            0.0,
+            -4.8
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "private",
+      "position": [
+        7,
+        4
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "label": "Marine & Logistics · zone_logistics",
+      "displayName": "Hàng hải & Hậu cần",
+      "displayNames": {
+        "vi": "Hàng hải & Hậu cần",
+        "en": "Marine & Logistics"
+      },
+      "colors": {
+        "accent": "#2dd4bf"
+      },
+      "floorStyle": "wood-planks",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 0,
+          "facing": 0
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -0.215,
+            0.0,
+            1.651
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.298,
+            0.0,
+            0.685
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            2.24
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.044,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.464,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.2,
+            1.5,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            5.25
+          ],
+          "label": "Vessel / flight schedule",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#2dd4bf"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.86
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.11
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -0.36
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.08,
+            1.2,
+            2.0
+          ],
+          "position": [
+            -5.25,
+            1.5,
+            -1.0
+          ],
+          "label": "Bản đồ thời tiết",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#38bdf8"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -4.9,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            4.9,
+            0.0,
+            -4.8
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "private",
+      "position": [
+        10,
+        4
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "label": "Finance · zone_finance",
+      "displayName": "Tài chính",
+      "displayNames": {
+        "vi": "Tài chính",
+        "en": "Finance"
+      },
+      "colors": {
+        "accent": "#fb7185"
+      },
+      "floorStyle": "wood-planks",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 0,
+          "facing": 0
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -0.215,
+            0.0,
+            1.651
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.298,
+            0.0,
+            0.685
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            2.24
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.044,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.464,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.2,
+            1.5,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            5.25
+          ],
+          "label": "Budget & DoA dashboard",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#fb7185"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.86
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.11
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -0.36
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -4.9,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            4.9,
+            0.0,
+            -4.8
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    },
+    {
+      "preset": "private",
+      "position": [
+        13,
+        4
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "label": "Asset Manager · zone_asset",
+      "displayName": "Quản lý tài sản (Asset Manager)",
+      "displayNames": {
+        "vi": "Quản lý tài sản (Asset Manager)",
+        "en": "Asset Manager"
+      },
+      "colors": {
+        "accent": "#fde68a"
+      },
+      "floorStyle": "wood-planks",
+      "doors": [
+        {
+          "rx": 0.5,
+          "ry": 0,
+          "facing": 0
+        }
+      ],
+      "furniture": [
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -0.215,
+            0.0,
+            1.651
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Owner chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            1.298,
+            0.0,
+            0.685
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.429,
+            0.793,
+            0.403
+          ],
+          "position": [
+            -1.298,
+            0.0,
+            1.115
+          ],
+          "rotation": [
+            0,
+            1.571,
+            0
+          ],
+          "material": {
+            "color": "#2a3a55"
+          },
+          "glbPath": "/models/kenney-furniture/chairDesk.glb",
+          "glbScale": 1.3,
+          "label": "Visitor chair"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.949,
+            0.494,
+            0.507
+          ],
+          "position": [
+            -0.461,
+            0.0,
+            2.24
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#1a2a40"
+          },
+          "glbPath": "/models/kenney-furniture/desk.glb",
+          "glbScale": 1.3,
+          "label": "Desk"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.044,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.507,
+            0.377,
+            0.13
+          ],
+          "position": [
+            0.464,
+            0.494,
+            2.073
+          ],
+          "rotation": [
+            0,
+            3.142,
+            0
+          ],
+          "material": {
+            "color": "#0b1220"
+          },
+          "glbPath": "/models/kenney-furniture/computerScreen.glb",
+          "glbScale": 1.3,
+          "label": "Monitor"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            3.2,
+            1.5,
+            0.08
+          ],
+          "position": [
+            0,
+            1.6,
+            5.25
+          ],
+          "label": "Decision board",
+          "material": {
+            "color": "#05080f",
+            "emissive": "#fde68a"
+          }
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.86
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -1.11
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.52,
+            1.105,
+            0.325
+          ],
+          "position": [
+            4.838,
+            0.0,
+            -0.36
+          ],
+          "rotation": [
+            0,
+            -1.571,
+            0
+          ],
+          "material": {
+            "color": "#3b2f2a"
+          },
+          "glbPath": "/models/kenney-furniture/bookcaseClosed.glb",
+          "glbScale": 1.3,
+          "label": "File cabinet"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            -4.9,
+            0.0,
+            4.9
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        },
+        {
+          "geometry": "box",
+          "size": [
+            0.288,
+            0.528,
+            0.32
+          ],
+          "position": [
+            4.9,
+            0.0,
+            -4.8
+          ],
+          "rotation": [
+            0,
+            0.0,
+            0
+          ],
+          "material": {
+            "color": "#2f7d4f"
+          },
+          "glbPath": "/models/kenney-furniture/pottedPlant.glb",
+          "glbScale": 1.6,
+          "label": "Plant"
+        }
+      ]
+    }
+  ],
+  "agents": {
+    "ops_agent": {
+      "desk": "zone_ops-desk-1",
+      "seat": "Operations · zone_ops::0",
+      "allowedRooms": [
+        "Operations · zone_ops"
+      ],
+      "energy": 0.35,
+      "color": "#22c55e"
+    },
+    "prodeng_agent": {
+      "desk": "zone_prod_eng-desk-1",
+      "seat": "Production/Subsurface · zone_prod_eng::0",
+      "allowedRooms": [
+        "Production/Subsurface · zone_prod_eng"
+      ],
+      "energy": 0.35,
+      "color": "#38bdf8"
+    },
+    "eng_lead": {
+      "desk": "zone_prod_eng-desk-1",
+      "seat": "Production/Subsurface · zone_prod_eng::2",
+      "allowedRooms": [
+        "Production/Subsurface · zone_prod_eng"
+      ],
+      "energy": 0.15,
+      "color": "#e2e8f0"
+    },
+    "maint_agent": {
+      "desk": "zone_maint-desk-1",
+      "seat": "Maintenance & Reliability · zone_maint::0",
+      "allowedRooms": [
+        "Maintenance & Reliability · zone_maint"
+      ],
+      "energy": 0.35,
+      "color": "#f97316"
+    },
+    "hse_agent": {
+      "desk": "zone_hse-desk-1",
+      "seat": "HSE · zone_hse::0",
+      "allowedRooms": [
+        "HSE · zone_hse"
+      ],
+      "energy": 0.35,
+      "color": "#eab308"
+    },
+    "contracts_agent": {
+      "desk": "zone_contracts-desk-1",
+      "seat": "Contracts & Procurement · zone_contracts::0",
+      "allowedRooms": [
+        "Contracts & Procurement · zone_contracts"
+      ],
+      "energy": 0.35,
+      "color": "#a78bfa"
+    },
+    "logistics_agent": {
+      "desk": "zone_logistics-desk-1",
+      "seat": "Marine & Logistics · zone_logistics::0",
+      "allowedRooms": [
+        "Marine & Logistics · zone_logistics"
+      ],
+      "energy": 0.35,
+      "color": "#2dd4bf"
+    },
+    "finance_agent": {
+      "desk": "zone_finance-desk-1",
+      "seat": "Finance · zone_finance::0",
+      "allowedRooms": [
+        "Finance · zone_finance"
+      ],
+      "energy": 0.35,
+      "color": "#fb7185"
+    },
+    "asset_manager": {
+      "desk": "zone_asset-desk-1",
+      "seat": "Asset Manager · zone_asset::0",
+      "allowedRooms": [
+        "Asset Manager · zone_asset"
+      ],
+      "energy": 0.15,
+      "color": "#fde68a"
+    },
+    "oim": {
+      "desk": "zone_ops-desk-1",
+      "seat": "Operations · zone_ops::2",
+      "allowedRooms": [
+        "Operations · zone_ops"
+      ],
+      "energy": 0.15,
+      "color": "#cbd5e1"
+    }
+  }
+}

@@ -125,7 +125,7 @@ export function ConnectStep({ onNext }: ConnectStepProps) {
         Connect your agents
       </h1>
       <p style={{ color: "var(--ink-2)", margin: "0 0 28px", maxWidth: "44ch" }}>
-        Diorama scanned this machine for agent runtimes. Pick what to visualize; you can also
+        Offshore Ops scanned this machine for agent runtimes. Pick what to visualize; you can also
         push events from anything over HTTP.
       </p>
 

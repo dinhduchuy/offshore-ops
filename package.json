@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Build 3D worlds for your AI agents — design offices, connect agent runtimes, watch them work live",
+  "description": "Build 3D worlds for your AI agents \u2014 design offices, connect agent runtimes, watch them work live",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.13"
   },
   "workspaces": [
     "packages/*"

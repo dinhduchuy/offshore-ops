@@ -30,16 +30,38 @@ export interface ChatTurn {
   toolResults?: Array<{ id: string; content: string }>;
 }
 
+export type ReasoningEffort = "low" | "medium" | "high" | "xhigh" | "max";
+
 export interface ChatRequest {
   system: string;
   messages: ChatTurn[];
   tools: ProviderToolDef[];
   maxTokens?: number;
+  /** Anthropic only: output_config.effort (omitted → model default) */
+  effort?: ReasoningEffort;
+  /** Anthropic only: server-side refusal fallback (`fallbacks: "default"`), models that support it */
+  refusalFallback?: boolean;
+}
+
+/** Call metadata (Anthropic fills it; other providers may leave it empty). Never contains secrets. */
+export interface ChatMeta {
+  /** Model that actually served the request (may differ after a refusal fallback) */
+  model?: string;
+  stopReason?: string;
+  requestId?: string;
+  usage?: {
+    inputTokens?: number;
+    outputTokens?: number;
+    cacheReadInputTokens?: number;
+    cacheCreationInputTokens?: number;
+  };
+  fallbackUsed?: boolean;
 }
 
 export interface ChatResponse {
   text: string;
   toolCalls: ProviderToolCall[];
+  meta?: ChatMeta;
 }
 
 export interface CopilotProviderConfig {
@@ -54,18 +76,99 @@ export interface CopilotProvider {
   chat(req: ChatRequest): Promise<ChatResponse>;
 }
 
-class ProviderError extends Error {
-  constructor(message: string, public status?: number) {
+export class ProviderError extends Error {
+  /** Duck-type marker (bundlers may duplicate this class) */
+  readonly isProviderError = true;
+  constructor(
+    message: string,
+    public status?: number,
+    /** API error type, e.g. authentication_error, not_found_error, rate_limit_error */
+    public errorType?: string,
+    public requestId?: string,
+    /** Seconds, from the retry-after header */
+    public retryAfter?: number,
+  ) {
     super(message);
     this.name = "ProviderError";
   }
+}
+
+/** Build a ProviderError from a failed HTTP response (body is read, never the request headers). */
+async function errorFromResponse(prefix: string, res: Response): Promise<ProviderError> {
+  const body = await res.text().catch(() => "");
+  let errorType: string | undefined;
+  let message = body.slice(0, 300);
+  try {
+    const parsed = JSON.parse(body) as { error?: { type?: string; message?: string } | string };
+    if (parsed && typeof parsed.error === "object" && parsed.error) {
+      errorType = parsed.error.type;
+      if (parsed.error.message) message = parsed.error.message.slice(0, 300);
+    }
+  } catch {
+    // non-JSON body
+  }
+  const header = (name: string) => (typeof res.headers?.get === "function" ? res.headers.get(name) : null);
+  const retry = Number(header("retry-after"));
+  return new ProviderError(
+    `${prefix} ${res.status}${errorType ? ` ${errorType}` : ""}: ${message}`,
+    res.status,
+    errorType,
+    header("request-id") ?? undefined,
+    Number.isFinite(retry) && retry > 0 ? retry : undefined,
+  );
 }
 
 // ---------------------------------------------------------------------------
 // Anthropic Messages API
 // ---------------------------------------------------------------------------
 
-const ANTHROPIC_DEFAULT_MODEL = "claude-sonnet-5";
+/** Current Claude API version (anthropic-version header). */
+export const ANTHROPIC_API_VERSION = "2026-10-21";
+export const ANTHROPIC_DEFAULT_MODEL = "claude-opus-5-5";
+/** Current models (platform.claude.com/docs/en/about-claude/models/overview, checked 2026-11-12). */
+export const ANTHROPIC_MODELS: Array<{ id: string; label: string }> = [
+  { id: "claude-opus-5-5", label: "Claude Opus 5.5 (khuyến nghị)" },
+  { id: "claude-sonnet-5-5", label: "Claude Sonnet 5.5 (nhanh hơn, rẻ hơn)" },
+  { id: "claude-haiku-5-5", label: "Claude Haiku 5.5 (nhanh nhất)" },
+  { id: "claude-fable-5-2", label: "Claude Fable 5.2 (mạnh nhất, đắt nhất)" },
+];
+/** Models that accept `fallbacks: "default"` (server-side refusal fallback beta). */
+const FALLBACK_MODELS = new Set(["claude-fable-5-2", "claude-fable-5-1", "claude-opus-5-5", "claude-opus-5", "claude-sonnet-5-5"]);
+const FALLBACK_BETA = "server-side-fallback-2026-07-01";
+/** Models whose effort parameter is known (anything else: effort is not sent). */
+const EFFORT_MODELS = /^claude-(fable|mythos|opus|sonnet|haiku)-5|^claude-opus-4-[678]|^claude-sonnet-4-6/;
+
+function anthropicHeaders(apiKey: string | undefined, betas: string[] = []): Record<string, string> {
+  return {
+    "content-type": "application/json",
+    "x-api-key": apiKey ?? "",
+    "anthropic-version": ANTHROPIC_API_VERSION,
+    ...(betas.length ? { "anthropic-beta": betas.join(",") } : {}),
+  };
+}
+
+/**
+ * Free connectivity check: GET /v1/models/{id} (not billed). Verifies the key
+ * (401/403), the model id (404) and reachability; returns the model lifecycle.
+ * It does NOT prove that a Messages call will succeed (credit balance, quotas).
+ */
+export async function checkAnthropicModel(cfg: CopilotProviderConfig): Promise<{
+  id: string;
+  displayName?: string;
+  lifecycle?: string;
+  requestId?: string;
+}> {
+  const baseUrl = (cfg.baseUrl ?? "https://api.anthropic.com").replace(/\/$/, "");
+  const model = cfg.model || ANTHROPIC_DEFAULT_MODEL;
+  const res = await fetch(`${baseUrl}/v1/models/${encodeURIComponent(model)}`, {
+    method: "GET",
+    headers: anthropicHeaders(cfg.apiKey),
+  });
+  if (!res.ok) throw await errorFromResponse("Anthropic", res);
+  const data = (await res.json()) as { id?: string; display_name?: string; lifecycle?: string };
+  const requestId = typeof res.headers?.get === "function" ? res.headers.get("request-id") ?? undefined : undefined;
+  return { id: data.id ?? model, displayName: data.display_name, lifecycle: data.lifecycle, requestId };
+}
 
 function anthropicMessages(messages: ChatTurn[]): unknown[] {
   return messages.map((m) => {
@@ -101,30 +204,50 @@ export function createAnthropicProvider(cfg: CopilotProviderConfig): CopilotProv
   return {
     id: "anthropic",
     async chat(req) {
+      const fallback = !!req.refusalFallback && FALLBACK_MODELS.has(model);
       const res = await fetch(`${baseUrl}/v1/messages`, {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "x-api-key": cfg.apiKey ?? "",
-          "anthropic-version": "2023-06-01",
-        },
+        headers: anthropicHeaders(cfg.apiKey, fallback ? [FALLBACK_BETA] : []),
         body: JSON.stringify({
           model,
           max_tokens: req.maxTokens ?? 2048,
           system: req.system,
           messages: anthropicMessages(req.messages),
           ...(req.tools.length ? { tools: req.tools } : {}),
+          ...(req.effort && EFFORT_MODELS.test(model) ? { output_config: { effort: req.effort } } : {}),
+          ...(fallback ? { fallbacks: "default" } : {}),
         }),
       });
-      if (!res.ok) {
-        const body = await res.text().catch(() => "");
-        throw new ProviderError(`Anthropic ${res.status}: ${body.slice(0, 300)}`, res.status);
-      }
+      if (!res.ok) throw await errorFromResponse("Anthropic", res);
       const data = (await res.json()) as {
+        model?: string;
+        stop_reason?: string;
+        usage?: {
+          input_tokens?: number;
+          output_tokens?: number;
+          cache_read_input_tokens?: number;
+          cache_creation_input_tokens?: number;
+          iterations?: Array<{ type?: string }>;
+        };
         content: Array<
           | { type: "text"; text: string }
           | { type: "tool_use"; id: string; name: string; input: Record<string, unknown> }
+          | { type: string }
         >;
+      };
+      const meta: ChatMeta = {
+        model: data.model,
+        stopReason: data.stop_reason,
+        requestId: typeof res.headers?.get === "function" ? res.headers.get("request-id") ?? undefined : undefined,
+        usage: data.usage
+          ? {
+              inputTokens: data.usage.input_tokens,
+              outputTokens: data.usage.output_tokens,
+              cacheReadInputTokens: data.usage.cache_read_input_tokens,
+              cacheCreationInputTokens: data.usage.cache_creation_input_tokens,
+            }
+          : undefined,
+        fallbackUsed: (data.usage?.iterations ?? []).some((it) => it.type === "fallback_message") || undefined,
       };
       const text = data.content
         .filter((b): b is { type: "text"; text: string } => b.type === "text")
@@ -133,7 +256,7 @@ export function createAnthropicProvider(cfg: CopilotProviderConfig): CopilotProv
       const toolCalls = data.content
         .filter((b): b is { type: "tool_use"; id: string; name: string; input: Record<string, unknown> } => b.type === "tool_use")
         .map((b) => ({ id: b.id, name: b.name, input: b.input }));
-      return { text, toolCalls };
+      return { text, toolCalls, meta };
     },
   };
 }
@@ -202,10 +325,7 @@ export function createOpenAICompatProvider(
           max_tokens: req.maxTokens ?? 2048,
         }),
       });
-      if (!res.ok) {
-        const body = await res.text().catch(() => "");
-        throw new ProviderError(`${id} ${res.status}: ${body.slice(0, 300)}`, res.status);
-      }
+      if (!res.ok) throw await errorFromResponse(id, res);
       const data = (await res.json()) as {
         choices: Array<{
           message: {

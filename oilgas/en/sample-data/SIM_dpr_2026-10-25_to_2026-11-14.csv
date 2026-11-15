@@ -1,0 +1,23 @@
+# SIMULATED — illustrative data, not real figures
+report_date,platform,well,oil_rate,oil_unit,gas_rate,gas_unit,water_rate,water_unit,uptime_h,downtime_h,thp,thp_unit,gl_inj,gl_inj_unit,choke_pct,notes,rate_basis,updated_at
+2026-10-25,SIM-WHP-A,A-03,1473,bbl/d,1.449,MMscf/d,423,bbl/d,24.0,0.0,30.6,bar,1.603,MMscf/d,62,,daily_volume,2026-10-26T06:30:00Z
+2026-10-26,SIM-WHP-A,A-03,1475,bbl/d,1.457,MMscf/d,423,bbl/d,24.0,0.0,30.5,bar,1.59,MMscf/d,62,,daily_volume,2026-10-27T06:30:00Z
+2026-10-27,SIM-WHP-A,A-03,1496,bbl/d,1.467,MMscf/d,424,bbl/d,24.0,0.0,30.4,bar,1.606,MMscf/d,62,,daily_volume,2026-10-28T06:30:00Z
+2026-10-28,SIM-WHP-A,A-03,1468,bbl/d,1.452,MMscf/d,420,bbl/d,24.0,0.0,30.6,bar,1.61,MMscf/d,62,,daily_volume,2026-10-29T06:30:00Z
+2026-10-29,SIM-WHP-A,A-03,1488,bbl/d,1.444,MMscf/d,424,bbl/d,24.0,0.0,30.6,bar,1.596,MMscf/d,62,,daily_volume,2026-10-30T06:30:00Z
+2026-10-30,SIM-WHP-A,A-03,1475,bbl/d,1.454,MMscf/d,420,bbl/d,24.0,0.0,30.5,bar,1.584,MMscf/d,62,,daily_volume,2026-10-31T06:30:00Z
+2026-10-31,SIM-WHP-A,A-03,1495,bbl/d,1.443,MMscf/d,423,bbl/d,24.0,0.0,30.6,bar,1.595,MMscf/d,62,,daily_volume,2026-11-01T06:30:00Z
+2026-11-01,SIM-WHP-A,A-03,1496,bbl/d,1.461,MMscf/d,416,bbl/d,24.0,0.0,30.4,bar,1.609,MMscf/d,62,,daily_volume,2026-11-02T06:30:00Z
+2026-11-02,SIM-WHP-A,A-03,1463,bbl/d,1.455,MMscf/d,419,bbl/d,24.0,0.0,30.7,bar,1.615,MMscf/d,62,,daily_volume,2026-11-03T06:30:00Z
+2026-11-03,SIM-WHP-A,A-03,1489,bbl/d,1.462,MMscf/d,417,bbl/d,24.0,0.0,30.4,bar,1.594,MMscf/d,62,,daily_volume,2026-11-04T06:30:00Z
+2026-11-04,SIM-WHP-A,A-03,1484,bbl/d,1.46,MMscf/d,418,bbl/d,24.0,0.0,30.3,bar,1.592,MMscf/d,62,,daily_volume,2026-11-05T06:30:00Z
+2026-11-05,SIM-WHP-A,A-03,1473,bbl/d,1.456,MMscf/d,423,bbl/d,24.0,0.0,30.7,bar,1.603,MMscf/d,62,,daily_volume,2026-11-06T06:30:00Z
+2026-11-06,SIM-WHP-A,A-03,1487,bbl/d,1.444,MMscf/d,421,bbl/d,24.0,0.0,30.5,bar,1.589,MMscf/d,62,,daily_volume,2026-11-07T06:30:00Z
+2026-11-07,SIM-WHP-A,A-03,1481,bbl/d,1.437,MMscf/d,423,bbl/d,24.0,0.0,30.5,bar,1.553,MMscf/d,62,,daily_volume,2026-11-08T06:30:00Z
+2026-11-08,SIM-WHP-A,A-03,1414,bbl/d,1.406,MMscf/d,442,bbl/d,24.0,0.0,30.3,bar,1.468,MMscf/d,62,,daily_volume,2026-11-09T06:30:00Z
+2026-11-09,SIM-WHP-A,A-03,1369,bbl/d,1.354,MMscf/d,456,bbl/d,24.0,0.0,29.6,bar,1.388,MMscf/d,62,,daily_volume,2026-11-10T06:30:00Z
+2026-11-10,SIM-WHP-A,A-03,1291,bbl/d,1.301,MMscf/d,484,bbl/d,24.0,0.0,29.4,bar,1.337,MMscf/d,62,"Gas-lift injection below setpoint, under observation",daily_volume,2026-11-11T06:30:00Z
+2026-11-11,SIM-WHP-A,A-03,1262,bbl/d,1.285,MMscf/d,505,bbl/d,24.0,0.0,28.9,bar,1.282,MMscf/d,62,,daily_volume,2026-11-12T06:30:00Z
+2026-11-12,SIM-WHP-A,A-03,1211,bbl/d,1.248,MMscf/d,524,bbl/d,24.0,0.0,28.6,bar,1.271,MMscf/d,62,,daily_volume,2026-11-13T06:30:00Z
+2026-11-13,SIM-WHP-A,A-03,1204,bbl/d,1.227,MMscf/d,541,bbl/d,24.0,0.0,28.1,bar,1.248,MMscf/d,62,,daily_volume,2026-11-14T06:30:00Z
+2026-11-14,SIM-WHP-A,A-03,1185,bbl/d,1.21,MMscf/d,555,bbl/d,24.0,0.0,27.8,bar,1.243,MMscf/d,62,,daily_volume,2026-11-15T06:30:00Z

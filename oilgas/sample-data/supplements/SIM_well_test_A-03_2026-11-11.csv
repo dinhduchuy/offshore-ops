@@ -1,0 +1,3 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+well,test_date,duration_h,oil_bbl_d,water_bbl_d,gas_mmscfd,thp_bar,chp_bar,gl_inj_mmscfd,choke_pct,separator,remarks
+A-03,2026-11-11,12,1172,548,1.18,27.9,61,1.24,62,V-200,Thử giếng sau suy giảm; lưu lượng gas lift thấp hơn setpoint 1.60

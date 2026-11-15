@@ -15,6 +15,8 @@ import { useGatewayEvents } from "@/hooks/useGatewayEvents";
 import { useMockEventSource } from "@/hooks/useMockEventSource";
 import { useIngestEvents } from "@/hooks/useIngestEvents";
 import type { AttentionEntry } from "@/hooks/useAttentionNotifications";
+import { useI18n } from "@/components/I18nProvider";
+import { localizedRoomName } from "@/lib/i18n/rooms";
 
 // Agent identity colors (data, not UI chrome — intentionally not design tokens)
 const AGENT_COLORS = ["#60a0ff", "#ff6090", "#60ffa0", "#ffa060", "#a060ff", "#ff60ff", "#60ffff"];
@@ -54,6 +56,7 @@ interface DashboardViewProps {
 }
 
 export function DashboardView({ config, onAttentionChange }: DashboardViewProps) {
+  const { t, tr, fmt, locale } = useI18n();
   const { eventBus, connect } = useGatewayEvents();
 
   const sources = config.sources ?? [];
@@ -208,18 +211,14 @@ export function DashboardView({ config, onAttentionChange }: DashboardViewProps)
     return () => clearInterval(timer);
   }, []);
 
-  const ago = (t: number | null) => {
-    if (!t) return "";
-    const s = Math.floor((Date.now() - t) / 1000);
-    return s < 60 ? `${s}s ago` : `${Math.floor(s / 60)}m ago`;
-  };
+  const ago = (ts: number | null) => (ts ? fmt.relative(ts, Date.now()) : "");
 
   return (
     <div style={{ padding: 24, overflowY: "auto", height: "100%", background: "var(--bg)" }}>
       <h2 style={{ margin: "0 0 20px", fontSize: 18, fontWeight: 650, letterSpacing: "-0.01em" }}>
         {config.name}
         <span className="dio-mono" style={{ fontSize: 12, fontWeight: 450, color: "var(--ink-3)", marginLeft: 12 }}>
-          {isDemoMode ? "demo" : localSources.filter((s) => s !== "ingest").join(" + ") || "live"}
+          {isDemoMode ? t("live.badge.demo") : localSources.filter((s) => s !== "ingest").join(" + ") || t("live.badge.live")}
         </span>
       </h2>
 
@@ -256,7 +255,7 @@ export function DashboardView({ config, onAttentionChange }: DashboardViewProps)
               </div>
               {pending && (
                 <p className="dio-mono dio-pulse" style={{ margin: "0 0 4px", fontSize: 11.5, fontWeight: 550, color: "var(--warn)" }}>
-                  waiting for you · {Math.max(0, Math.floor((Date.now() - pending.since) / 1000))}s
+                  {t("dash.waitingForYou", { seconds: Math.max(0, Math.floor((Date.now() - pending.since) / 1000)) })}
                 </p>
               )}
               <p className="dio-mono" style={{ margin: 0, fontSize: 11.5, color: "var(--ink-2)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -269,7 +268,7 @@ export function DashboardView({ config, onAttentionChange }: DashboardViewProps)
           );
         })}
         {agents.length === 0 && (
-          <p style={{ color: "var(--ink-3)", fontSize: 13 }}>No agents yet — events will populate this grid.</p>
+          <p style={{ color: "var(--ink-3)", fontSize: 13 }}>{tr("Chưa có agent — sự kiện sẽ lấp đầy lưới này.", "No agents yet — events will populate this grid.")}</p>
         )}
       </div>
 
@@ -277,9 +276,9 @@ export function DashboardView({ config, onAttentionChange }: DashboardViewProps)
         {/* Activity stream */}
         <div className="dio-card" style={{ padding: 16, minHeight: 220 }}>
           <h4 style={{ margin: "0 0 10px", fontSize: 11, fontWeight: 550, letterSpacing: "0.02em", color: "var(--ink-2)" }}>
-            Activity
+            {t("feed.title")}
           </h4>
-          {feed.length === 0 && <p style={{ color: "var(--ink-3)", fontSize: 12 }}>Waiting for events…</p>}
+          {feed.length === 0 && <p style={{ color: "var(--ink-3)", fontSize: 12 }}>{tr("Đang chờ sự kiện…", "Waiting for events…")}</p>}
           {feed.map((row) => (
             <div key={row.id} className="dio-mono" style={{ display: "flex", alignItems: "baseline", gap: 8, padding: "3px 0", fontSize: 12 }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: row.attention ? "var(--warn)" : row.color, flexShrink: 0, alignSelf: "center" }} />
@@ -292,11 +291,11 @@ export function DashboardView({ config, onAttentionChange }: DashboardViewProps)
         {/* Room occupancy */}
         <div className="dio-card" style={{ padding: 16 }}>
           <h4 style={{ margin: "0 0 10px", fontSize: 11, fontWeight: 550, letterSpacing: "0.02em", color: "var(--ink-2)" }}>
-            Rooms
+            {tr("Phòng", "Rooms")}
           </h4>
           {config.rooms.map((room, i) => (
             <div key={`${room.label}-${i}`} style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", fontSize: 12.5 }}>
-              <span style={{ color: "var(--ink-2)" }}>{room.label}</span>
+              <span style={{ color: "var(--ink-2)" }} title={room.label}>{localizedRoomName(room, locale)}</span>
               <span className="dio-mono" style={{ color: "var(--ink-3)", fontSize: 11.5 }}>
                 {roomCounts.get(i) ?? 0} events
               </span>

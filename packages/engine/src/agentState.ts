@@ -11,12 +11,14 @@ export interface AgentState {
   path: [number, number, number][];
   waypointIndex: number;
   seatRotation: number | null;
+  /** Seat surface height (world units) while seated; null → figure default */
+  seatHeight?: number | null;
 }
 
 export type AgentAction =
   | { type: "SET_PATH"; path: [number, number, number][] }
   | { type: "TICK"; delta: number }
-  | { type: "SIT"; seatRotation: number }
+  | { type: "SIT"; seatRotation: number; seatHeight?: number | null }
   | { type: "STAND" };
 
 export function createAgentState(opts: {
@@ -91,6 +93,7 @@ export function updateAgentState(
         ...state,
         mode: "seated",
         seatRotation: action.seatRotation,
+        seatHeight: action.seatHeight ?? null,
       };
 
     case "STAND":
@@ -98,6 +101,7 @@ export function updateAgentState(
         ...state,
         mode: "idle",
         seatRotation: null,
+        seatHeight: null,
       };
 
     default:

@@ -24,6 +24,8 @@
       "@diorama/cli/*": ["packages/cli/src/*"],
       "@diorama/ui": ["packages/ui/src"],
       "@diorama/ui/*": ["packages/ui/src/*"],
+      "@diorama/ops": ["packages/ops/src"],
+      "@diorama/ops/*": ["packages/ops/src/*"],
       "@diorama/app": ["packages/app"],
       "@diorama/app/*": ["packages/app/*"]
     }
@@ -33,6 +35,7 @@
     { "path": "packages/engine" },
     { "path": "packages/plugins" },
     { "path": "packages/cli" },
-    { "path": "packages/ui" }
+    { "path": "packages/ui" },
+    { "path": "packages/ops" }
   ]
 }

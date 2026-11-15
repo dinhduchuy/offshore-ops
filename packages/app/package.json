@@ -16,7 +16,8 @@
     "three": "^0.175.0",
     "@diorama/engine": "*",
     "@diorama/plugins": "*",
-    "@diorama/ui": "*"
+    "@diorama/ui": "*",
+    "@diorama/ops": "*"
   },
   "devDependencies": {
     "@types/react": "^19.1.0",

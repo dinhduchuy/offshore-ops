@@ -55,7 +55,7 @@ const QUICK_PROMPTS = [
 const MODEL_PLACEHOLDERS: Record<CopilotProviderConfig["provider"], string> = {
   "claude-cli": "(your CLI default — or e.g. sonnet)",
   "codex-cli": "(your CLI default)",
-  anthropic: "claude-sonnet-5",
+  anthropic: "claude-opus-5-5",
   "openai-compatible": "gpt-5",
   ollama: "llama3.1",
   "codex-auth": "gpt-5",
@@ -112,7 +112,7 @@ export function CopilotPanel({
       for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
         const { state: curState, theme: curTheme, agents: curAgents } = worldRef.current;
         const system =
-          "You are Diorama's office-building copilot. You edit a 3D office world for AI agents using the provided tools. Be concise. Current world:\n" +
+          "You are Offshore Ops' office-building copilot. You edit a 3D office world for AI agents using the provided tools. Be concise. Current world:\n" +
           describeWorld(curState, curTheme, curAgents) +
           "\nWhen the user asks for changes, call tools. Prefer generate_layout for whole-team requests. Never invent room labels — use the ones listed.";
 

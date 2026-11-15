@@ -1,0 +1,5 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+item,description,weight_t,deck_m2
+SLICKLINE-UNIT,"Cụm thiết bị slickline (tời, cột, BOP)",7.5,14.0
+PRESSURE-GAUGE-KIT,Bộ đồng hồ áp suất/nhiệt độ,0.2,0.5
+MEMORY-GAUGES,Memory gauges PBU,0.15,0.5

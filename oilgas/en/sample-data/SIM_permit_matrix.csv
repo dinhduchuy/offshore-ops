@@ -1,0 +1,7 @@
+# SIMULATED — illustrative data, not real figures
+activity_type,permit_type,required_documents
+slickline_fgs,Well intervention PTW,risk_assessment;jsa;well_barrier_schematic;simops_plan
+pbu_survey,Well intervention PTW,risk_assessment;jsa;well_barrier_schematic;simops_plan
+water_sampling,Cold work PTW,jsa
+gl_fcv_inspection,Cold work PTW + isolation certificate,risk_assessment;jsa;isolation_plan
+well_test_rerun,Cold work PTW,jsa

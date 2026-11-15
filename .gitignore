@@ -3,4 +3,11 @@ dist/
 *.tsbuildinfo
 .DS_Store
 .next/
+.next-*/
 out/
+
+# oil & gas simulator
+oilgas/.venv/
+oilgas/backups/
+__pycache__/
+.env.local

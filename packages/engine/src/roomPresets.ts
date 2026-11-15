@@ -257,6 +257,16 @@ export function getPreset(id: string): RoomPreset | undefined {
   return ROOM_PRESETS.find((p) => p.id === id);
 }
 
+/**
+ * The doors a room actually has: explicit `room.doors` when present,
+ * otherwise the preset's defaults, otherwise one south-centre door.
+ * Walls (cutouts) and pathfinding must both use this resolution.
+ */
+export function getRoomDoors(room: { preset: string; doors?: RelativeDoor[] }): RelativeDoor[] {
+  if (room.doors && room.doors.length > 0) return room.doors;
+  return getPreset(room.preset)?.doors ?? SOUTH_CENTER_DOOR;
+}
+
 export function getFurniture(presetId: string, themeId: string): FurnitureItem[] {
   const preset = getPreset(presetId);
   if (!preset) return [];

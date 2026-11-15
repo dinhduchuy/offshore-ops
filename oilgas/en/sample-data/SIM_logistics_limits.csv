@@ -1,0 +1,7 @@
+# SIMULATED — illustrative data, not real figures
+parameter,value,unit,note
+max_hs_vessel_m,2.5,m,Wave limit for PSV alongside
+max_hs_crane_m,2.5,m,Wave limit for crane lifts
+max_wind_heli_kn,35,kn,Wind limit for helicopters
+pob_max,80,persons,Maximum POB
+pob_current,74,persons,Current POB

@@ -81,76 +81,36 @@ export function generateWalls(room: RoomRect, doors: DoorConfig[]): WallSegment[
         glass,
       });
     } else {
-      // Split wall around each door
-      // For simplicity, create left segment, gap, right segment
-      for (const door of sideDoors) {
-        const isHorizontal = side.facing === 0 || side.facing === 180;
+      // Split the wall around every door on this side. Doors are sorted along
+      // the wall and solid segments are emitted for the gaps between them, so
+      // a side with several doors gets one opening per door (not overlapping
+      // left/right halves that would re-cover the other doors).
+      const isHorizontal = side.facing === 0 || side.facing === 180;
+      const halfDoorCanvas = (DOOR_WIDTH / SCALE) / 2;
+      const origin = isHorizontal ? room.x : room.y;
+      const openings = sideDoors
+        .map((door) => (isHorizontal ? door.x : door.y) - origin)
+        .sort((a, b) => a - b);
 
-        if (isHorizontal) {
-          const doorLocalX = door.x - room.x;
-          const halfDoorCanvas = (DOOR_WIDTH / SCALE) / 2;
-
-          // Left segment
-          const leftLen = doorLocalX - halfDoorCanvas;
-          if (leftLen > 1) {
-            const leftCx = room.x + leftLen / 2;
-            const [wx, , wz] = toWorld(leftCx, side.cy);
-            segments.push({
-              position: [wx, WALL_HEIGHT / 2, wz],
-              width: leftLen * SCALE,
-              height: WALL_HEIGHT,
-              rotation: side.rot,
-              glass,
-            });
-          }
-
-          // Right segment
-          const rightStart = doorLocalX + halfDoorCanvas;
-          const rightLen = room.w - rightStart;
-          if (rightLen > 1) {
-            const rightCx = room.x + rightStart + rightLen / 2;
-            const [wx, , wz] = toWorld(rightCx, side.cy);
-            segments.push({
-              position: [wx, WALL_HEIGHT / 2, wz],
-              width: rightLen * SCALE,
-              height: WALL_HEIGHT,
-              rotation: side.rot,
-              glass,
-            });
-          }
-        } else {
-          // Vertical walls with doors — similar split on Y axis
-          const doorLocalY = door.y - room.y;
-          const halfDoorCanvas = (DOOR_WIDTH / SCALE) / 2;
-
-          const topLen = doorLocalY - halfDoorCanvas;
-          if (topLen > 1) {
-            const topCy = room.y + topLen / 2;
-            const [wx, , wz] = toWorld(side.cx, topCy);
-            segments.push({
-              position: [wx, WALL_HEIGHT / 2, wz],
-              width: topLen * SCALE,
-              height: WALL_HEIGHT,
-              rotation: side.rot,
-              glass,
-            });
-          }
-
-          const bottomStart = doorLocalY + halfDoorCanvas;
-          const bottomLen = room.h - bottomStart;
-          if (bottomLen > 1) {
-            const bottomCy = room.y + bottomStart + bottomLen / 2;
-            const [wx, , wz] = toWorld(side.cx, bottomCy);
-            segments.push({
-              position: [wx, WALL_HEIGHT / 2, wz],
-              width: bottomLen * SCALE,
-              height: WALL_HEIGHT,
-              rotation: side.rot,
-              glass,
-            });
-          }
-        }
+      let cursor = 0;
+      const pushSegment = (from: number, to: number) => {
+        const len = to - from;
+        if (len <= 1) return;
+        const mid = origin + from + len / 2;
+        const [wx, , wz] = isHorizontal ? toWorld(mid, side.cy) : toWorld(side.cx, mid);
+        segments.push({
+          position: [wx, WALL_HEIGHT / 2, wz],
+          width: len * SCALE,
+          height: WALL_HEIGHT,
+          rotation: side.rot,
+          glass,
+        });
+      };
+      for (const offset of openings) {
+        pushSegment(cursor, offset - halfDoorCanvas);
+        cursor = Math.max(cursor, offset + halfDoorCanvas);
       }
+      pushSegment(cursor, side.len);
     }
   }
 

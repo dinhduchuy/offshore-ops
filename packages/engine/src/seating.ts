@@ -104,3 +104,55 @@ export function resolveSeatRef(
 
   return { roomIndex, furnitureIndex, item };
 }
+
+/**
+ * Seat geometry of the bundled GLB models, in model units (measured from the
+ * Kenney furniture kit). The kit's origin is a CORNER of the model, not its
+ * center, so the seat point is offset from `item.position`. `center` is the
+ * seat point in the model's local x/z (backrest on −z, sitter faces +z);
+ * `seatHeight` is the top of the seat surface.
+ */
+const GLB_SEATS: Record<string, { center: [number, number]; seatHeight: number }> = {
+  "chair.glb": { center: [0.1, -0.08], seatHeight: 0.22 },
+  "chairdesk.glb": { center: [0.167, -0.1], seatHeight: 0.32 },
+  "stoolbar.glb": { center: [0.133, -0.115], seatHeight: 0.44 },
+  "bench.glb": { center: [0.2, -0.08], seatHeight: 0.22 },
+  "benchcushion.glb": { center: [0.2, -0.08], seatHeight: 0.24 },
+  "loungechair.glb": { center: [0.245, -0.22], seatHeight: 0.25 },
+  "loungesofa.glb": { center: [0.49, -0.22], seatHeight: 0.25 },
+  "loungesofalong.glb": { center: [0.49, 0.0], seatHeight: 0.25 },
+  "loungedesignchair.glb": { center: [0.365, -0.22], seatHeight: 0.22 },
+  "loungedesignsofa.glb": { center: [0.56, -0.22], seatHeight: 0.22 },
+};
+
+export interface SeatAnchor {
+  /** World-space offset from item.position (rotation + scale applied) */
+  dx: number;
+  dz: number;
+  /** Seat surface height above the floor (world units) */
+  seatHeight: number;
+  /** Rotation the sitter faces (same as the item's y rotation) */
+  facing: number;
+}
+
+/**
+ * Where a person sits on a furniture item, relative to item.position.
+ * GLB items use the measured table above; primitive items are centered
+ * meshes, so the seat is at the center and the top is size[1] / 2.
+ */
+export function seatAnchor(item: FurnitureItem): SeatAnchor {
+  const rotY = item.rotation ? item.rotation[1] : 0;
+  const glbName = (item.glbPath ?? "").split("/").pop()?.toLowerCase() ?? "";
+  const known = item.glbPath ? GLB_SEATS[glbName] : undefined;
+  if (known) {
+    const scale = item.glbScale ?? 1;
+    const lx = known.center[0] * scale;
+    const lz = known.center[1] * scale;
+    // three.js Y rotation: x' = x·cos + z·sin ; z' = −x·sin + z·cos
+    const c = Math.cos(rotY);
+    const s = Math.sin(rotY);
+    return { dx: lx * c + lz * s, dz: -lx * s + lz * c, seatHeight: known.seatHeight * scale, facing: rotY };
+  }
+  const h = item.geometry === "sphere" ? item.size[0] : item.size[1] / 2;
+  return { dx: 0, dz: 0, seatHeight: Math.max(0, (item.position[1] ?? 0) + h), facing: rotY };
+}

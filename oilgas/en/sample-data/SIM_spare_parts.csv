@@ -1,0 +1,5 @@
+# SIMULATED — illustrative data, not real figures
+part_no,description,system,qty_offshore,qty_onshore,lead_time_days,weight_t,deck_m2
+FCV-TRIM-KIT-2IN,2-inch FCV trim kit,Gas lift,0,1,21,0.04,0.2
+SL-CONSUMABLES-KIT,"Slickline consumables kit (wire, seals, tools)",Well services,0,0,10,0.3,1.0
+WATER-SAMPLE-KIT,Water sample bottle kit,Production,6,10,5,0.01,0.1

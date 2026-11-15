@@ -26,7 +26,7 @@ export function LaunchStep({ gatewayUrl, gatewayToken, sources, theme, rooms, ag
     setError(null);
 
     const config = {
-      name: "My Diorama Office",
+      name: "Offshore Ops Office",
       gateway: { url: gatewayUrl, token: gatewayToken },
       sources,
       view: "3d-office",

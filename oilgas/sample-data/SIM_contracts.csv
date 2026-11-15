@@ -1,0 +1,5 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+contract_no,vendor,scope_categories,valid_from,valid_to,ceiling_usd,committed_usd
+SIM-C-2024-017,SIM Wireline Services Co.,slickline;wireline,2024-03-01,2027-02-28,2400000,1985000
+SIM-C-2025-044,SIM Lab Analytics,lab_analysis,2025-01-01,2026-12-31,150000,61000
+SIM-C-2023-008,SIM Metering Services,metering_services,2023-01-01,2026-06-30,300000,240000

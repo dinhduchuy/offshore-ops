@@ -3,6 +3,9 @@ import {
   createCopilotProvider,
   createAnthropicProvider,
   createOpenAICompatProvider,
+  checkAnthropicModel,
+  ProviderError,
+  ANTHROPIC_API_VERSION,
   type ChatRequest,
 } from "./providers";
 
@@ -81,6 +84,71 @@ describe("anthropic provider", () => {
     fetchMock.mockResolvedValue(jsonResponse({ error: "bad key" }, 401));
     const p = createAnthropicProvider({ provider: "anthropic", apiKey: "bad" });
     await expect(p.chat(REQ)).rejects.toThrow(/Anthropic 401/);
+  });
+});
+
+describe("anthropic provider — current API surface", () => {
+  it("sends anthropic-version 2026-10-21, defaults to claude-opus-5-5, no sampling params", async () => {
+    fetchMock.mockResolvedValue(jsonResponse({ content: [{ type: "text", text: "ok" }] }));
+    await createAnthropicProvider({ provider: "anthropic", apiKey: "k" }).chat(REQ);
+    const [, init] = fetchMock.mock.calls[0];
+    expect((init as { headers: Record<string, string> }).headers["anthropic-version"]).toBe(ANTHROPIC_API_VERSION);
+    expect(ANTHROPIC_API_VERSION).toBe("2026-10-21");
+    const body = JSON.parse((init as { body: string }).body);
+    expect(body.model).toBe("claude-opus-5-5");
+    expect(body).not.toHaveProperty("temperature");
+    expect(body).not.toHaveProperty("output_config");
+    expect((init as { headers: Record<string, string> }).headers).not.toHaveProperty("anthropic-beta");
+  });
+
+  it("sends effort and the refusal-fallback beta only for models that support them; returns meta", async () => {
+    fetchMock.mockResolvedValue({
+      ...jsonResponse({
+        model: "claude-opus-5-5",
+        stop_reason: "end_turn",
+        usage: { input_tokens: 11, output_tokens: 7, iterations: [{ type: "message" }, { type: "fallback_message" }] },
+        content: [{ type: "thinking", thinking: "" }, { type: "text", text: "hi" }],
+      }),
+      headers: { get: (h: string) => (h === "request-id" ? "req_abc" : null) },
+    });
+    const res = await createAnthropicProvider({ provider: "anthropic", apiKey: "k", model: "claude-opus-5-5" }).chat({ ...REQ, effort: "low", refusalFallback: true });
+    const [, init] = fetchMock.mock.calls[0];
+    const body = JSON.parse((init as { body: string }).body);
+    expect(body.output_config).toEqual({ effort: "low" });
+    expect(body.fallbacks).toBe("default");
+    expect((init as { headers: Record<string, string> }).headers["anthropic-beta"]).toBe("server-side-fallback-2026-07-01");
+    expect(res.text).toBe("hi");
+    expect(res.meta).toMatchObject({ model: "claude-opus-5-5", stopReason: "end_turn", requestId: "req_abc", usage: { inputTokens: 11, outputTokens: 7 }, fallbackUsed: true });
+
+    fetchMock.mockClear();
+    fetchMock.mockResolvedValue(jsonResponse({ content: [{ type: "text", text: "x" }] }));
+    await createAnthropicProvider({ provider: "anthropic", apiKey: "k", model: "claude-haiku-4-5" }).chat({ ...REQ, effort: "low", refusalFallback: true });
+    const body2 = JSON.parse((fetchMock.mock.calls[0][1] as { body: string }).body);
+    expect(body2).not.toHaveProperty("output_config"); // effort unsupported there
+    expect(body2).not.toHaveProperty("fallbacks");
+  });
+
+  it("parses API errors into typed fields (type, status, request id, retry-after)", async () => {
+    fetchMock.mockResolvedValue({
+      ...jsonResponse({ type: "error", error: { type: "rate_limit_error", message: "Number of requests has exceeded your rate limit" } }, 429),
+      headers: { get: (h: string) => ({ "request-id": "req_429", "retry-after": "20" })[h] ?? null },
+    });
+    const err = await createAnthropicProvider({ provider: "anthropic", apiKey: "k" }).chat(REQ).catch((e) => e);
+    expect(err).toBeInstanceOf(ProviderError);
+    expect(err).toMatchObject({ status: 429, errorType: "rate_limit_error", requestId: "req_429", retryAfter: 20 });
+  });
+
+  it("checkAnthropicModel uses the free Models API (GET, no body) and reports lifecycle", async () => {
+    fetchMock.mockResolvedValue(jsonResponse({ id: "claude-opus-5-5", display_name: "Claude Opus 5.5", lifecycle: "active", type: "model" }));
+    const info = await checkAnthropicModel({ provider: "anthropic", apiKey: "k", model: "claude-opus-5-5" });
+    const [url, init] = fetchMock.mock.calls[0];
+    expect(url).toBe("https://api.anthropic.com/v1/models/claude-opus-5-5");
+    expect((init as { method: string }).method).toBe("GET");
+    expect(init as object).not.toHaveProperty("body");
+    expect(info).toMatchObject({ id: "claude-opus-5-5", displayName: "Claude Opus 5.5", lifecycle: "active" });
+
+    fetchMock.mockResolvedValue(jsonResponse({ type: "error", error: { type: "authentication_error", message: "invalid x-api-key" } }, 401));
+    await expect(checkAnthropicModel({ provider: "anthropic", apiKey: "bad" })).rejects.toMatchObject({ status: 401, errorType: "authentication_error" });
   });
 });
 

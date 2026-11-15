@@ -6,6 +6,8 @@ export interface RoomPlacement {
   label: string;
   colors?: { accent?: string; floor?: string; wall?: string };
   floorStyle?: "solid" | "grid-tiles" | "wood-planks" | "hex-tiles" | "carpet";
+  /** Explicit doors (relative to room size) — preserved through edits */
+  doors?: Array<{ rx: number; ry: number; facing: 0 | 90 | 180 | 270 }>;
   furniture?: Array<{
     geometry: "box" | "cylinder" | "sphere" | "plane";
     size: [number, number, number];

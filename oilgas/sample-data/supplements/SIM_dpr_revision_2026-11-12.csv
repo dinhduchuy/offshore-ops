@@ -1,0 +1,4 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+report_date,platform,well,oil_rate,oil_unit,gas_rate,gas_unit,water_rate,water_unit,uptime_h,downtime_h,thp,thp_unit,gl_inj,gl_inj_unit,choke_pct,notes,rate_basis,updated_at
+2026-11-10,SIM-WHP-A,A-03,1213,bbl/d,1.219,MMscf/d,536,bbl/d,24.0,0.0,28.2,bar,1.252,MMscf/d,62,Hiệu chỉnh sau đối soát bình tách,daily_volume,2026-11-12T03:00:00Z
+2026-11-09,SIM-WHP-A,A-05,1291,bbl/d,0.6,MMscf/d,902,bbl/d,24.0,0.0,18.0,bar,,MMscf/d,70,,daily_volume,2026-11-09T22:00:00Z

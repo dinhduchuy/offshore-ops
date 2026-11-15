@@ -2,9 +2,12 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { computeIdlePose, type AgentState, type AgentActivity } from "@diorama/engine";
+import { computeIdlePose, agentFigureDims, agentPose, type AgentState, type AgentActivity } from "@diorama/engine";
 import { ActivityIndicator3D } from "./ActivityIndicator3D";
 import type { Group } from "three";
+
+/** One shared set of proportions (engine/agentFigure.ts → AGENT_FIGURE_SCALE). */
+const DIMS = agentFigureDims();
 
 interface AgentFigure3DProps {
   state: AgentState;
@@ -19,6 +22,8 @@ interface AgentFigure3DProps {
   attention?: boolean;
   /** Label for the attention pill. */
   attentionLabel?: string;
+  /** Click handler (selects the agent) */
+  onClick?: () => void;
 }
 
 export function AgentFigure3D({
@@ -30,35 +35,50 @@ export function AgentFigure3D({
   activity = "idle",
   attention = false,
   attentionLabel,
+  onClick,
 }: AgentFigure3DProps) {
   const groupRef = useRef<Group>(null);
   const bodyRef = useRef<Group>(null);
+  const leftLegRef = useRef<Group>(null);
+  const rightLegRef = useRef<Group>(null);
+
+  const seated = state.mode === "seated";
+  const pose = agentPose(DIMS, seated, state.seatHeight);
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
 
-    // Position from agent state
+    // Position from agent state; seated agents face the way the seat faces
     groupRef.current.position.set(state.x, 0, state.z);
-    groupRef.current.rotation.y = state.facing;
+    groupRef.current.rotation.y = state.mode === "seated" && state.seatRotation != null ? state.seatRotation : state.facing;
 
-    // Idle animation
+    const t = clock.getElapsedTime();
     if (state.mode === "idle" || state.mode === "seated") {
-      const pose = computeIdlePose(clock.getElapsedTime(), phase, energy);
+      const idle = computeIdlePose(t, phase, energy);
       if (bodyRef.current) {
-        bodyRef.current.position.x = pose.bodySwayX;
-        bodyRef.current.position.z = pose.bodySwayZ;
-        bodyRef.current.rotation.x = pose.torsoLean;
-        bodyRef.current.rotation.y = pose.chairTurn;
+        bodyRef.current.position.x = idle.bodySwayX * DIMS.scale;
+        bodyRef.current.position.z = idle.bodySwayZ * DIMS.scale;
+        bodyRef.current.rotation.x = idle.torsoLean;
+        bodyRef.current.rotation.y = idle.chairTurn;
       }
     }
+    // Simple gait: legs swing while walking, rest otherwise
+    const swing = state.mode === "walking" ? Math.sin(t * 9 + phase) * 0.55 : 0;
+    if (leftLegRef.current) leftLegRef.current.rotation.x = swing;
+    if (rightLegRef.current) rightLegRef.current.rotation.x = -swing;
   });
 
-  const yOffset = state.mode === "seated" ? 0.3 : 0;
+  const legMat = <meshStandardMaterial color={color} roughness={0.8} />;
 
   return (
-    <group ref={groupRef}>
-      {/* Activity indicator + name label above head */}
-      <group position={[0, 1.5 + yOffset, 0]}>
+    <group
+      ref={groupRef}
+      onClick={onClick ? (e) => { e.stopPropagation(); onClick(); } : undefined}
+      onPointerOver={onClick ? () => { document.body.style.cursor = "pointer"; } : undefined}
+      onPointerOut={onClick ? () => { document.body.style.cursor = ""; } : undefined}
+    >
+      {/* Activity indicator + name label above the head */}
+      <group position={[0, pose.labelY, 0]}>
         <ActivityIndicator3D
           activity={activity}
           agentLabel={label}
@@ -67,27 +87,57 @@ export function AgentFigure3D({
           attentionLabel={attentionLabel}
         />
       </group>
-      <group ref={bodyRef} position={[0, yOffset, 0]}>
-        {/* Body - capsule shape */}
-        <mesh position={[0, 0.7, 0]}>
-          <capsuleGeometry args={[0.15, 0.5, 8, 16]} />
+
+      {/* Legs */}
+      {seated ? (
+        [-1, 1].map((side) => (
+          <group key={side} position={[side * DIMS.legSpread, 0, 0]}>
+            {/* thigh: horizontal, forward from the hips on the seat */}
+            <mesh position={[0, pose.hipY + DIMS.legRadius, DIMS.thighLength / 2]} rotation={[Math.PI / 2, 0, 0]}>
+              <capsuleGeometry args={[DIMS.legRadius, DIMS.thighLength, 4, 10]} />
+              {legMat}
+            </mesh>
+            {/* shin: from the knee down to the floor */}
+            <mesh position={[0, (pose.hipY + DIMS.legRadius) / 2, DIMS.thighLength]}>
+              <capsuleGeometry args={[DIMS.legRadius, Math.max(0.01, pose.hipY - DIMS.legRadius), 4, 10]} />
+              {legMat}
+            </mesh>
+          </group>
+        ))
+      ) : (
+        <>
+          <group ref={leftLegRef} position={[-DIMS.legSpread, pose.hipY, 0]}>
+            <mesh position={[0, -DIMS.legLength / 2, 0]}>
+              <capsuleGeometry args={[DIMS.legRadius, DIMS.legLength - 2 * DIMS.legRadius, 4, 10]} />
+              {legMat}
+            </mesh>
+          </group>
+          <group ref={rightLegRef} position={[DIMS.legSpread, pose.hipY, 0]}>
+            <mesh position={[0, -DIMS.legLength / 2, 0]}>
+              <capsuleGeometry args={[DIMS.legRadius, DIMS.legLength - 2 * DIMS.legRadius, 4, 10]} />
+              {legMat}
+            </mesh>
+          </group>
+        </>
+      )}
+
+      <group ref={bodyRef}>
+        {/* Torso — capsule, bottom on the hips */}
+        <mesh position={[0, pose.torsoY, 0]}>
+          <capsuleGeometry args={[DIMS.torsoRadius, DIMS.torsoLength, 8, 16]} />
           <meshStandardMaterial color={color} />
         </mesh>
 
         {/* Head */}
-        <mesh position={[0, 1.15, 0]}>
-          <sphereGeometry args={[0.12, 16, 16]} />
+        <mesh position={[0, pose.headY, 0]}>
+          <sphereGeometry args={[DIMS.headRadius, 16, 16]} />
           <meshStandardMaterial color={color} />
         </mesh>
 
-        {/* Badge glow */}
-        <mesh position={[0, 0.9, 0.16]}>
-          <sphereGeometry args={[0.04, 8, 8]} />
-          <meshStandardMaterial
-            color={color}
-            emissive={color}
-            emissiveIntensity={1}
-          />
+        {/* Badge glow (front = +z) */}
+        <mesh position={[0, pose.badgeY, DIMS.torsoRadius + DIMS.badgeRadius * 0.25]}>
+          <sphereGeometry args={[DIMS.badgeRadius, 8, 8]} />
+          <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1} />
         </mesh>
       </group>
     </group>

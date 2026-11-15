@@ -1,0 +1,4 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+doc_id,title,doc_type,activity_type,scope,status,valid_to
+HSE-SIM-0077,Kế hoạch SIMOPS can thiệp giếng trên WHP-A,simops_plan,,SIM-WHP-A,Approved,2027-03-31
+HSE-RA-0412,Đánh giá rủi ro công tác slickline trên WHP-A (rev.2),risk_assessment,slickline_fgs,SIM-WHP-A,Approved,2027-10-31

@@ -1,0 +1,101 @@
+{
+  "detection": {
+    "dropThresholdPct": 15,
+    "consecutiveDays": 3,
+    "baseline": {
+      "mode": "rolling",
+      "windowDays": 7,
+      "offsetDays": 4,
+      "fixed": {}
+    },
+    "normalizeByUptime": true,
+    "minUptimeHours": 12,
+    "rateBasis": "unspecified"
+  },
+  "dataQuality": {
+    "lateUpdateHours": 36,
+    "staleReportHours": 48
+  },
+  "engineering": {
+    "wellTestMaxAgeDays": 30,
+    "waterCutRisePp": 5,
+    "gasLiftDropPct": 10,
+    "correlationMin": 0.6
+  },
+  "procurement": {
+    "minQuotes": 2
+  },
+  "logistics": {
+    "leadDays": 3
+  },
+  "approvals": {
+    "technicalRole": "Trưởng phòng Kỹ thuật khai thác",
+    "assetRole": "Asset Manager",
+    "readinessRole": "OIM",
+    "closeRole": "Trưởng phòng Kỹ thuật khai thác"
+  },
+  "runtime": {
+    "demoTaskDelayMs": 2500,
+    "llm": {
+      "enabled": false,
+      "maxTokens": 16000,
+      "maxConcurrent": 2
+    },
+    "maxConcurrentPerAgent": 2
+  },
+  "policy": {
+    "version": "SAMPLE-2026.11",
+    "source": "SAMPLE configuration shipped with the SIMULATED data set — not a company policy or standard; it must be issued by an authorised body before any real use",
+    "waiverRoles": {
+      "quotes_min": [
+        "Asset Manager"
+      ],
+      "over_budget": [
+        "Phó Tổng Giám đốc",
+        "Tổng Giám đốc"
+      ]
+    },
+    "nonWaivable": [
+      "scope_current",
+      "cost_complete",
+      "afe",
+      "logistics_feasible",
+      "resources_no_conflict",
+      "hse_valid_at_execution",
+      "ptw_by_authority",
+      "execution_confirmed",
+      "evaluation_met",
+      "transport_holds_valid",
+      "transport_booked",
+      "weather_in_limits"
+    ],
+    "holdDays": 7
+  },
+  "closure": {
+    "observationDays": 3,
+    "recoveryShareMin": 0.5
+  },
+  "priority": {
+    "p1LossBbl": 300,
+    "p2LossBbl": 100
+  },
+  "sla": {
+    "agentHours": 4,
+    "approvalHours": 48,
+    "dataHours": 72,
+    "executionHours": 240
+  },
+  "calendar": {
+    "timeZone": "Asia/Ho_Chi_Minh"
+  },
+  "scope": {
+    "rowsWithoutPlatform": "SIM-WHP-A"
+  },
+  "limits": {
+    "importMaxBytes": 10485760,
+    "importMaxRows": 50000
+  },
+  "content": {
+    "language": "en"
+  }
+}

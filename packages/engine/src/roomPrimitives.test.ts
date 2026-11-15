@@ -77,3 +77,25 @@ describe("generateDoor", () => {
     expect(door.width).toBeCloseTo(1.2, 1);
   });
 });
+
+describe("generateWalls — multiple doors on one side", () => {
+  it("leaves an opening at every door instead of re-covering earlier ones", () => {
+    const room = { x: 0, y: 0, w: 2000, h: 200 };
+    const doors = [
+      { x: 400, y: 0, facing: 0 },
+      { x: 1100, y: 0, facing: 0 },
+      { x: 1700, y: 0, facing: 0 },
+    ];
+    const north = generateWalls(room, doors).filter((s) => s.rotation === 0 && s.position[2] < -8);
+    // 3 doors → 4 solid segments on the north wall, none overlapping a door
+    expect(north).toHaveLength(4);
+    for (const door of doors) {
+      const doorWx = door.x * 0.018 - 1800 * 0.018 * 0.5;
+      for (const seg of north) {
+        expect(Math.abs(seg.position[0] - doorWx)).toBeGreaterThanOrEqual(seg.width / 2);
+      }
+    }
+    const solid = north.reduce((sum, s) => sum + s.width, 0);
+    expect(solid).toBeCloseTo(2000 * 0.018 - 3 * 1.2, 3);
+  });
+});

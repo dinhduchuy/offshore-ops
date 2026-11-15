@@ -1,0 +1,34 @@
+{
+  "simulated": true,
+  "description": "Bộ dữ liệu GIẢ LẬP cho kịch bản giếng A-03 giảm sản lượng (SIM-WHP-A).",
+  "base": [
+    "SIM_well_master.csv",
+    "SIM_activity_catalog.csv",
+    "SIM_maintenance_history.csv",
+    "SIM_spare_parts.csv",
+    "SIM_hse_documents.csv",
+    "SIM_permit_matrix.csv",
+    "SIM_contracts.csv",
+    "SIM_rate_sheet.csv",
+    "SIM_quotes.csv",
+    "SIM_quote_SupplyA_RFQ-2026-118.txt",
+    "SIM_cost_estimates.csv",
+    "SIM_equipment_catalog.csv",
+    "SIM_vessel_schedule.csv",
+    "SIM_flight_schedule.csv",
+    "SIM_weather_forecast.csv",
+    "SIM_logistics_limits.csv",
+    "SIM_budget_FY2026.xlsx",
+    "SIM_authority_matrix.csv",
+    "SIM_well_test.csv",
+    "SIM_dpr_2026-10-22_to_2026-11-11.csv"
+  ],
+  "supplements": [
+    "supplements/SIM_well_test_A-03_2026-11-11.csv",
+    "supplements/SIM_quotes_SupplyB.csv",
+    "supplements/SIM_dpr_revision_2026-11-12.csv",
+    "supplements/SIM_hse_simops_update.csv",
+    "supplements/SIM_SIMOPS_plan_WHP-A.pdf",
+    "supplements/SIM_psc_terms.csv"
+  ]
+}

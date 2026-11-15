@@ -1,0 +1,41 @@
+{
+  "simulated": true,
+  "description": "SIMULATED DEMO data set — platform SIM-WHP-A, well A-03, one production-decline case (recording date 2026-11-15).",
+  "language": "en",
+  "asOf": "2026-11-15",
+  "dprPeriod": {
+    "from": "2026-10-25",
+    "to": "2026-11-14"
+  },
+  "deliberateGap": {
+    "what": "Latest A-03 well test is too old",
+    "date": "2026-09-28",
+    "maxAgeDays": 30,
+    "resolvedBy": "supplements/SIM_well_test_A-03_2026-11-14.csv"
+  },
+  "expectedProcurementStep": "Only 1 of 2 quotes for SL-CONSUMABLES-KIT → after scope approval, a draft RFQ asks for another quote (not blocking)",
+  "base": [
+    "SIM_well_master.csv",
+    "SIM_activity_catalog.csv",
+    "SIM_maintenance_history.csv",
+    "SIM_spare_parts.csv",
+    "SIM_hse_documents.csv",
+    "SIM_permit_matrix.csv",
+    "SIM_contracts.csv",
+    "SIM_rate_sheet.csv",
+    "SIM_quotes.csv",
+    "SIM_cost_estimates.csv",
+    "SIM_equipment_catalog.csv",
+    "SIM_vessel_schedule.csv",
+    "SIM_flight_schedule.csv",
+    "SIM_weather_forecast.csv",
+    "SIM_logistics_limits.csv",
+    "SIM_budget_FY2026.xlsx",
+    "SIM_authority_matrix.csv",
+    "SIM_well_test.csv",
+    "SIM_dpr_2026-10-25_to_2026-11-14.csv"
+  ],
+  "supplements": [
+    "supplements/SIM_well_test_A-03_2026-11-14.csv"
+  ]
+}

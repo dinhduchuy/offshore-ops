@@ -1,0 +1,5 @@
+# SIMULATED — illustrative data, not real figures
+item,description,weight_t,deck_m2
+SLICKLINE-UNIT,"Slickline spread (winch, mast, BOP)",7.5,14.0
+PRESSURE-GAUGE-KIT,Pressure/temperature gauge kit,0.2,0.5
+MEMORY-GAUGES,Memory gauges PBU,0.15,0.5

@@ -2,10 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { AgentActivity } from "@diorama/engine";
+import { useI18n } from "@/components/I18nProvider";
+import { eventText, type EventMsg } from "@/lib/i18n/events";
 
 export interface FeedEntry {
   id: string;
+  /** Original text (shown when there is no message key, and in Vietnamese for server events) */
   label: string;
+  /** Message key + params rendered at display time — switching language updates old entries too */
+  msg?: EventMsg;
+  /** Prefix (agent name) for server messages */
+  agentName?: string;
+  /** Server event labels are Vietnamese; generic 3D activity labels are built from keys */
+  labelLang?: string;
   agentColor: string;
   timestamp: number;
   activity: AgentActivity;
@@ -17,14 +26,16 @@ interface ActivityFeedProps {
   entries: FeedEntry[];
 }
 
-function relativeTime(ts: number, now: number): string {
-  const diff = Math.floor((now - ts) / 1000);
-  if (diff < 1) return "now";
-  if (diff < 60) return `${diff}s ago`;
-  return `${Math.floor(diff / 60)}m ago`;
-}
-
 export function ActivityFeed({ entries }: ActivityFeedProps) {
+  const { t, fmt, locale } = useI18n();
+  const text = (e: FeedEntry): { text: string; lang?: string } => {
+    // Generic activity → always from keys; server event → Vietnamese original unless another locale has a key
+    if (e.msg && (e.msg.key === "ev.generic" || locale !== (e.labelLang ?? "vi"))) {
+      const s = eventText(e.msg, locale);
+      if (s) return { text: e.msg.key === "ev.generic" ? s : `${e.agentName ? `${e.agentName} ` : ""}${s}` };
+    }
+    return { text: e.label, lang: e.labelLang && e.labelLang !== locale ? e.labelLang : undefined };
+  };
   const scrollRef = useRef<HTMLDivElement>(null);
   const [tick, setTick] = useState(Date.now());
 
@@ -71,7 +82,7 @@ export function ActivityFeed({ entries }: ActivityFeedProps) {
           borderBottom: "1px solid var(--border)",
         }}
       >
-        Activity
+        {t("feed.title")}
       </div>
 
       {/* Scrollable entries */}
@@ -110,8 +121,8 @@ export function ActivityFeed({ entries }: ActivityFeedProps) {
               }}
             />
             {/* Label */}
-            <span style={{ color: "var(--ink-2)", flex: 1 }}>
-              {entry.label}
+            <span style={{ color: "var(--ink-2)", flex: 1 }} lang={text(entry).lang}>
+              {text(entry).text}
             </span>
             {/* Timestamp */}
             <span
@@ -122,7 +133,7 @@ export function ActivityFeed({ entries }: ActivityFeedProps) {
                 marginTop: 1,
               }}
             >
-              {relativeTime(entry.timestamp, tick)}
+              {fmt.relative(entry.timestamp, tick)}
             </span>
           </div>
         ))}

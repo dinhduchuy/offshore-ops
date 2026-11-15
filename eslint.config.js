@@ -6,6 +6,9 @@ export default tseslint.config(
     ignores: [
       "**/node_modules/**",
       "**/.next/**",
+      "**/.next-*/**", // isolated demo builds (NEXT_DIST_DIR)
+      "**/.venv/**",
+      "artifacts/**", // demo recording/editing scripts, not product code
       "**/dist/**",
       "**/build/**",
       "packages/app/next-env.d.ts",

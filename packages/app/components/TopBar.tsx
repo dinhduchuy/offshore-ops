@@ -1,5 +1,7 @@
 "use client";
 
+import { LanguageSwitch } from "@/components/I18nProvider";
+
 /**
  * The shared app bar — one bar across home, wizard, live view, and
  * dashboard so the product feels like one surface. Center and right
@@ -16,8 +18,10 @@ export function TopBar({
   return (
     <header
       style={{
-        height: 48,
+        // grows when the center wraps on narrow screens (no clipped/overlapping badges)
+        minHeight: 48,
         flexShrink: 0,
+        columnGap: 12,
         display: "grid",
         gridTemplateColumns: "1fr auto 1fr",
         alignItems: "center",
@@ -37,13 +41,18 @@ export function TopBar({
           textDecoration: "none",
           color: "var(--ink)",
           justifySelf: "start",
+          whiteSpace: "nowrap",
         }}
       >
         <span aria-hidden style={{ color: "var(--accent)", fontSize: 14, lineHeight: 1 }}>◆</span>
-        <span style={{ fontSize: 13, fontWeight: 650, letterSpacing: "0.01em" }}>Diorama</span>
+        <span style={{ fontSize: 13, fontWeight: 650, letterSpacing: "0.01em" }}>Offshore Ops</span>
       </a>
-      <div>{center}</div>
-      <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 8 }}>{actions}</div>
+      <div style={{ minWidth: 0, padding: "4px 0" }}>{center}</div>
+      <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
+        {actions}
+        {/* One language switch on every page (/, Dashboard, wizard, /ops) */}
+        <LanguageSwitch />
+      </div>
     </header>
   );
 }

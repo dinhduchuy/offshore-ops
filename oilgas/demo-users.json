@@ -1,0 +1,54 @@
+{
+  "_note": "DANH MỤC NGƯỜI DÙNG DEMO — chỉ dùng khi OPS_OPERATING_MODE=demo. Không phải xác thực doanh nghiệp: ai truy cập được /ops đều chọn được các danh tính này. Chế độ production từ chối mọi danh tính demo.",
+  "users": [
+    {
+      "id": "demo.englead",
+      "name": "Demo · Trưởng phòng Kỹ thuật khai thác",
+      "roles": [
+        "Trưởng phòng Kỹ thuật khai thác"
+      ]
+    },
+    {
+      "id": "demo.asset",
+      "name": "Demo · Asset Manager",
+      "roles": [
+        "Asset Manager"
+      ]
+    },
+    {
+      "id": "demo.oim",
+      "name": "Demo · OIM",
+      "roles": [
+        "OIM"
+      ]
+    },
+    {
+      "id": "demo.engineer",
+      "name": "Demo · Kỹ sư khai thác (không có quyền duyệt)",
+      "roles": [
+        "Kỹ sư khai thác"
+      ]
+    },
+    {
+      "id": "demo.hse",
+      "name": "Demo · Trưởng bộ phận HSE",
+      "roles": [
+        "Trưởng bộ phận HSE"
+      ]
+    },
+    {
+      "id": "demo.marine",
+      "name": "Demo · Marine coordinator",
+      "roles": [
+        "Marine coordinator"
+      ]
+    },
+    {
+      "id": "demo.admin",
+      "name": "Demo · Quản trị hệ thống",
+      "roles": [
+        "Quản trị hệ thống"
+      ]
+    }
+  ]
+}

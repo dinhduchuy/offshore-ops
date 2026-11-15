@@ -1,11 +1,15 @@
 "use client";
 
-import { useMemo, useCallback, useState, useEffect } from "react";
+import { useMemo, useCallback, useState, useEffect, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Html } from "@react-three/drei";
-import { generateFloor, generateWalls, getFurniture, getFloorWall, getPreset, drawFloorPattern, type RoomConfig, type FloorStyle, type DoorConfig } from "@diorama/engine";
+import { generateFloor, generateWalls, getFurniture, getFloorWall, getRoomDoors, drawFloorPattern, type RoomConfig, type FloorStyle, type DoorConfig } from "@diorama/engine";
 import { RoomFurniture3D } from "./RoomFurniture3D";
+import { ROOM_LABEL, roomLabelStyle } from "./roomLabelStyle";
 import type { ThreeEvent } from "@react-three/fiber";
+import { useI18n } from "@/components/I18nProvider";
+import { localizedRoomName, roomNameLang } from "@/lib/i18n/rooms";
 
 const GRID_UNIT = 200;
 const WALL_OPACITY_GLASS = 0.15;
@@ -31,6 +35,8 @@ interface Room3DProps {
 }
 
 export function Room3D({ room, accentColor, floorColor, themeId, selected, multiSelected, glowIntensity = 0, selectedFurnitureIndex = null, furniturePreview = null, onFurniturePointerDown, onPointerDown, onPointerUp, onPointerMove }: Room3DProps) {
+  // App-wide interface language (shared provider; R3F bridges React context into the canvas)
+  const { locale } = useI18n();
   // Resolve preset floor+wall defaults; null for unknown presets (e.g. "custom") — downstream uses have fallbacks
   const presetFloorWall = useMemo(
     () => getFloorWall(room.preset, themeId),
@@ -73,9 +79,8 @@ export function Room3D({ room, accentColor, floorColor, themeId, selected, multi
       glassWalls: true,
     };
 
-    // Resolve door configs from preset relative positions to absolute canvas coords
-    const preset = getPreset(room.preset);
-    const doors: DoorConfig[] = (preset?.doors ?? []).map((rd) => ({
+    // Resolve door configs (room.doors override, else preset defaults) to absolute canvas coords
+    const doors: DoorConfig[] = getRoomDoors(room).map((rd) => ({
       x: rect.x + rd.rx * rect.w,
       y: rect.y + rd.ry * rect.h,
       facing: rd.facing,
@@ -85,7 +90,7 @@ export function Room3D({ room, accentColor, floorColor, themeId, selected, multi
       floor: generateFloor(rect),
       walls: generateWalls(rect, doors),
     };
-  }, [room.position, room.size, room.preset, effectiveFloor]);
+  }, [room.position, room.size, room.preset, room.doors, effectiveFloor]);
 
   // If room has custom furniture, use it; otherwise fall back to preset defaults
   const furniture = useMemo(
@@ -179,24 +184,19 @@ export function Room3D({ room, accentColor, floorColor, themeId, selected, multi
         </mesh>
       ))}
 
-      {/* Room label — floating above */}
-      <Html
-        position={[floor.position[0], 2.8, floor.position[2]]}
-        center
-        distanceFactor={10}
-        style={{ pointerEvents: "none" }}
-      >
-        <div style={{
-          color: effectiveAccent,
-          fontSize: 14,
-          fontWeight: 600,
-          whiteSpace: "nowrap",
-          textShadow: "0 0 8px rgba(0,0,0,0.8)",
-          userSelect: "none",
-        }}>
-          {room.label}
-        </div>
-      </Html>
+      {/* Room name — above the back wall so it never covers people or desks */}
+      <RoomLabel
+        position={[
+          floor.position[0],
+          (walls.reduce((m, w) => Math.max(m, w.height), 0) || 2.5) + ROOM_LABEL.liftAboveWall,
+          floor.position[2] - floor.depth / 2 + ROOM_LABEL.insetFromBackWall,
+        ]}
+        text={localizedRoomName(room, locale)}
+        lang={roomNameLang(room, locale)}
+        title={room.label}
+        accent={effectiveAccent}
+        cells={room.size[0]}
+      />
 
       {/* Neon edge glow */}
       <mesh position={[floor.position[0], 0.07, floor.position[2]]}>
@@ -259,6 +259,40 @@ export function Room3D({ room, accentColor, floorColor, themeId, selected, multi
         previewOverride={furniturePreview}
         onItemPointerDown={onFurniturePointerDown}
       />
+    </group>
+  );
+}
+
+/**
+ * Screen-space room label: scales with camera distance (grows when zooming
+ * in) but is clamped between ROOM_LABEL.minScreenPx and maxScreenPx so the
+ * name is readable on the whole-office view. Updated per frame via a ref
+ * (no React re-render).
+ */
+function RoomLabel({ position, text, title, accent, cells, lang }: { position: [number, number, number]; text: string; title: string; accent: string; cells: number; lang?: string }) {
+  const anchor = useRef<THREE.Group>(null);
+  const box = useRef<HTMLDivElement>(null);
+  const tmp = useMemo(() => new THREE.Vector3(), []);
+  useFrame(({ camera }) => {
+    if (!anchor.current || !box.current) return;
+    anchor.current.getWorldPosition(tmp);
+    const dist = Math.max(0.001, camera.position.distanceTo(tmp));
+    const fov = (camera as unknown as { fov?: number }).fov ?? 50;
+    const natural = ROOM_LABEL.distanceFactor / (2 * Math.tan(((fov * Math.PI) / 180) / 2) * dist);
+    const min = ROOM_LABEL.minScreenPx / ROOM_LABEL.fontSize;
+    const max = ROOM_LABEL.maxScreenPx / ROOM_LABEL.fontSize;
+    const scale = Math.min(max, Math.max(min, natural));
+    // Compare with the element itself: drei may recreate the DOM node, so no cached value
+    const next = `scale(${scale.toFixed(2)})`;
+    if (box.current.style.transform !== next) box.current.style.transform = next;
+  });
+  return (
+    <group ref={anchor} position={position}>
+      <Html center style={{ pointerEvents: "none" }} zIndexRange={[20, 0]}>
+        <div ref={box} style={{ ...roomLabelStyle(accent, cells), transformOrigin: "center center" }} title={`${text} · ${title}`} lang={lang}>
+          {text}
+        </div>
+      </Html>
     </group>
   );
 }

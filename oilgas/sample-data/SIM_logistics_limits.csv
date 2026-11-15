@@ -1,0 +1,7 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+parameter,value,unit,note
+max_hs_vessel_m,2.5,m,Giới hạn sóng cho PSV cập giàn
+max_hs_crane_m,2.5,m,Giới hạn sóng cho cẩu hàng
+max_wind_heli_kn,35,kn,Giới hạn gió cho trực thăng
+pob_max,80,người,Sức chứa POB tối đa
+pob_current,74,người,POB hiện tại

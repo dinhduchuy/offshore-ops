@@ -1,0 +1,8 @@
+# SIMULATED — illustrative data, not real figures
+contract_no,item_code,description,unit,rate_usd,applies_to
+SIM-C-2024-017,SL-01,Slickline unit & crew (4 people),day,6200,slickline_fgs
+SIM-C-2024-017,SL-02,Mob/demob slickline spread,lump sum,8500,slickline_fgs
+SIM-C-2024-017,SL-03,Pressure/temperature gauge rental,day,450,slickline_fgs
+SIM-C-2024-017,SL-04,FGS data processing & report,job,2200,slickline_fgs
+SIM-C-2024-017,SL-11,Memory gauges PBU,day,900,pbu_survey
+SIM-C-2025-044,LB-01,"Water analysis (2 samples: salinity, ions)",job,760,water_sampling

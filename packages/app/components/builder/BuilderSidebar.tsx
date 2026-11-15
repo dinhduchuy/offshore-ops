@@ -29,6 +29,7 @@ function configToRooms(config: DioramaConfig): RoomPlacement[] {
     label: r.label,
     ...(r.colors && { colors: r.colors }),
     ...(r.floorStyle && { floorStyle: r.floorStyle }),
+    ...(r.doors && { doors: r.doors }),
     ...(r.furniture && { furniture: r.furniture }),
   }));
 }
@@ -51,6 +52,7 @@ export function BuilderSidebar({ config, selectedRoom, onConfigChange, onSelectR
           label: r.label,
           ...(r.colors && { colors: r.colors }),
           ...(r.floorStyle && { floorStyle: r.floorStyle }),
+          ...(r.doors && { doors: r.doors }),
           ...(r.furniture && { furniture: r.furniture }),
         })),
       };

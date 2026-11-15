@@ -1,0 +1,5 @@
+# SIMULATED — illustrative data, not real figures
+item,unit,estimate_usd,basis
+SL-CONSUMABLES-KIT,kit,7500,Last purchase price + 5% (simulated)
+vessel_deck_m2,m²,450,Average allocated PSV deck rate (simulated internal estimate)
+helicopter_seat_roundtrip,seat,2900,Average round-trip helicopter seat price (simulated)

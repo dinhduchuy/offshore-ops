@@ -1,0 +1,12 @@
+# SIMULATED — illustrative data, not real figures
+doc_id,title,doc_type,activity_type,scope,status,valid_from,valid_to
+HSE-RA-0412,Risk assessment — slickline work on WHP-A (rev.2),risk_assessment,slickline_fgs,SIM-WHP-A,Approved,2026-10-15,2027-10-30
+HSE-JSA-1102,JSA — slickline work,jsa,slickline_fgs,SIM-WHP-A,Approved,2026-09-15,2027-04-03
+HSE-RA-0419,Risk assessment — PBU survey,risk_assessment,pbu_survey,SIM-WHP-A,Approved,2026-09-15,2027-07-02
+HSE-JSA-1150,JSA — fluid sampling,jsa,water_sampling,SIM-WHP-A,Approved,2026-09-15,2027-02-02
+HSE-RA-0501,Risk assessment — surface valve maintenance,risk_assessment,gl_fcv_inspection,SIM-WHP-A,Approved,2026-09-15,2027-06-02
+HSE-JSA-1201,JSA — gas control valve maintenance,jsa,gl_fcv_inspection,SIM-WHP-A,Approved,2026-10-15,2027-06-02
+HSE-ISO-0333,Isolation plan — gas-lift FCV,isolation_plan,gl_fcv_inspection,SIM-WHP-A,Approved,2026-09-15,2027-02-02
+HSE-SIM-0077,SIMOPS plan — well intervention on WHP-A,simops_plan,,SIM-WHP-A,Approved,2026-10-15,2027-04-03
+WBS-A03-2025,Well barrier schematic A-03,well_barrier_schematic,,A-03,Approved,2026-01-18,2027-01-03
+HSE-JSA-0900,JSA — well test,jsa,well_test_rerun,SIM-WHP-A,Approved,2026-09-15,2027-03-04

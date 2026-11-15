@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Html } from "@react-three/drei";
 import type { AgentActivity } from "@diorama/engine";
+import { useI18n } from "@/components/I18nProvider";
 
 const ACTIVITY_ICONS: Record<AgentActivity, string> = {
   idle: "",
@@ -35,6 +36,8 @@ export function ActivityIndicator3D({
   attention = false,
   attentionLabel,
 }: ActivityIndicator3DProps) {
+  // Read outside <Html> (drei renders its children in a separate root)
+  const needsYou = useI18n().t("attention.needsYou");
   const [dots, setDots] = useState(".");
 
   useEffect(() => {
@@ -83,7 +86,7 @@ export function ActivityIndicator3D({
             }}
           >
             <span aria-hidden>✋</span>
-            <span>{attentionLabel ?? "needs you"}</span>
+            <span>{attentionLabel || needsYou}</span>
           </div>
         )}
 

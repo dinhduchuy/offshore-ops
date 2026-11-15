@@ -1,0 +1,32 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+voyage_id,vessel,depart_date,destination,deck_m2_free,max_lift_t,status
+V-1101,SIM Ocean Star,2026-11-16,SIM-WHP-A,30,10,Scheduled
+V-1102,SIM Ocean Star,2026-11-19,SIM-WHP-A,30,10,Scheduled
+V-1103,SIM Sea Swift,2026-11-23,SIM-WHP-A,12,8,Scheduled
+V-1104,SIM Ocean Star,2026-11-26,SIM-WHP-A,35,10,Scheduled
+V-1105,SIM Ocean Star,2026-11-30,SIM-WHP-A,30,10,Scheduled
+V-1106,SIM Ocean Star,2026-12-03,SIM-WHP-A,30,10,Scheduled
+V-1107,SIM Ocean Star,2026-12-07,SIM-WHP-A,30,10,Scheduled
+V-1108,SIM Ocean Star,2026-12-10,SIM-WHP-A,30,10,Scheduled
+V-1109,SIM Ocean Star,2026-12-14,SIM-WHP-A,30,10,Scheduled
+V-1110,SIM Ocean Star,2026-12-17,SIM-WHP-A,30,10,Scheduled
+V-1111,SIM Ocean Star,2026-12-21,SIM-WHP-A,30,10,Scheduled
+V-1112,SIM Ocean Star,2026-12-24,SIM-WHP-A,30,10,Scheduled
+V-1113,SIM Ocean Star,2026-12-28,SIM-WHP-A,30,10,Scheduled
+V-1114,SIM Ocean Star,2026-12-31,SIM-WHP-A,30,10,Scheduled
+V-1115,SIM Ocean Star,2027-01-04,SIM-WHP-A,30,10,Scheduled
+V-1116,SIM Ocean Star,2027-01-07,SIM-WHP-A,30,10,Scheduled
+V-1117,SIM Ocean Star,2027-01-11,SIM-WHP-A,30,10,Scheduled
+V-1118,SIM Ocean Star,2027-01-14,SIM-WHP-A,30,10,Scheduled
+V-1119,SIM Ocean Star,2027-01-18,SIM-WHP-A,30,10,Scheduled
+V-1120,SIM Ocean Star,2027-01-21,SIM-WHP-A,30,10,Scheduled
+V-1121,SIM Ocean Star,2027-01-25,SIM-WHP-A,30,10,Scheduled
+V-1122,SIM Ocean Star,2027-01-28,SIM-WHP-A,30,10,Scheduled
+V-1123,SIM Ocean Star,2027-02-01,SIM-WHP-A,30,10,Scheduled
+V-1124,SIM Ocean Star,2027-02-04,SIM-WHP-A,30,10,Scheduled
+V-1125,SIM Ocean Star,2027-02-08,SIM-WHP-A,30,10,Scheduled
+V-1126,SIM Ocean Star,2027-02-11,SIM-WHP-A,30,10,Scheduled
+V-1127,SIM Ocean Star,2027-02-15,SIM-WHP-A,30,10,Scheduled
+V-1128,SIM Ocean Star,2027-02-18,SIM-WHP-A,30,10,Scheduled
+V-1129,SIM Ocean Star,2027-02-22,SIM-WHP-A,30,10,Scheduled
+V-1130,SIM Ocean Star,2027-02-25,SIM-WHP-A,30,10,Scheduled

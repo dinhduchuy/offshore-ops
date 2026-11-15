@@ -1,0 +1,54 @@
+{
+  "_note": "DEMO USER DIRECTORY (English display names for the EN demo) — only when OPS_OPERATING_MODE=demo. Not enterprise authentication: anyone who can open /ops can pick these identities. Role values are the role IDs used for authorization and are unchanged.",
+  "users": [
+    {
+      "id": "demo.englead",
+      "name": "Demo · Head of Production Engineering",
+      "roles": [
+        "Trưởng phòng Kỹ thuật khai thác"
+      ]
+    },
+    {
+      "id": "demo.asset",
+      "name": "Demo · Asset Manager",
+      "roles": [
+        "Asset Manager"
+      ]
+    },
+    {
+      "id": "demo.oim",
+      "name": "Demo · OIM",
+      "roles": [
+        "OIM"
+      ]
+    },
+    {
+      "id": "demo.engineer",
+      "name": "Demo · Production Engineer (no approval right)",
+      "roles": [
+        "Kỹ sư khai thác"
+      ]
+    },
+    {
+      "id": "demo.hse",
+      "name": "Demo · HSE Lead",
+      "roles": [
+        "Trưởng bộ phận HSE"
+      ]
+    },
+    {
+      "id": "demo.marine",
+      "name": "Demo · Marine Coordinator",
+      "roles": [
+        "Marine coordinator"
+      ]
+    },
+    {
+      "id": "demo.admin",
+      "name": "Demo · System Administrator",
+      "roles": [
+        "Quản trị hệ thống"
+      ]
+    }
+  ]
+}

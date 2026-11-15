@@ -1,0 +1,6 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+item,unit,estimate_usd,basis
+SL-CONSUMABLES-KIT,kit,7500,Giá mua lần trước (06/2025) + 5%
+vessel_deck_m2,m²,450,Đơn giá phân bổ boong PSV bình quân 2025 (ước tính nội bộ)
+helicopter_seat_roundtrip,ghế,2900,Giá ghế trực thăng khứ hồi bình quân 2025
+meter_calibration,job,4200,Lần hiệu chuẩn trước + 5%

@@ -45,3 +45,15 @@ export function matchRoomIndex(
   }
   return best;
 }
+
+/**
+ * Name to SHOW for a room: `displayName` when set, otherwise the label without
+ * a trailing technical zone id ("Operations · zone_ops" → "Operations").
+ * Never use this for matching — match on `label`.
+ */
+export function roomDisplayName(room: { label: string; displayName?: string }): string {
+  const d = room.displayName?.trim();
+  if (d) return d;
+  const stripped = room.label.replace(/\s*[·•|-]\s*zone_[a-z0-9_]+\s*$/i, "").trim();
+  return stripped || room.label;
+}

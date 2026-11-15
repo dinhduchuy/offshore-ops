@@ -17,7 +17,7 @@ Configured in the panel's settings card (⚙). Keys are stored in
 |---|---|---|
 | **Claude Code CLI** ⭐ | the `claude` CLI you already log into — **no key** | your CLI default |
 | **Codex CLI** ⭐ | the `codex` CLI (ChatGPT login) — **no key** | your CLI default |
-| **Anthropic API key** | an API key (`sk-ant-…`) | `claude-sonnet-5` |
+| **Anthropic API key** | an API key (`sk-ant-…`) | `claude-opus-5-5` |
 | **OpenAI-compatible** | key + optional base URL — works with OpenAI, OpenRouter, Groq, LM Studio, vLLM… | `gpt-5` |
 | **Ollama (local)** | a running `ollama serve` — no key | `llama3.1` |
 

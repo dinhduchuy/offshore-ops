@@ -52,7 +52,7 @@ export { generateAutoLayout, findNextPosition } from "./autoLayout";
 export type { AutoLayoutResult } from "./autoLayout";
 
 // Room Presets
-export { ROOM_PRESETS, getPreset, getFurniture, getFloorWall } from "./roomPresets";
+export { ROOM_PRESETS, getPreset, getFurniture, getFloorWall, getRoomDoors } from "./roomPresets";
 export type { RoomPreset, RelativeDoor, FurnitureItem, ThemeId, ThemeFloorWall } from "./roomPresets";
 
 // Furniture Catalog
@@ -91,11 +91,14 @@ export {
   furnitureDisplayName,
   buildSeatOptions,
   resolveSeatRef,
+  seatAnchor,
 } from "./seating";
-export type { SeatOption, ResolvedSeat } from "./seating";
+export type { SeatOption, ResolvedSeat, SeatAnchor } from "./seating";
+export { AGENT_FIGURE_SCALE, agentFigureDims, agentPose } from "./agentFigure";
+export type { AgentFigureDims, AgentPose } from "./agentFigure";
 
 // Room Matching
-export { normalizeRoomName, matchRoomIndex } from "./roomMatch";
+export { normalizeRoomName, matchRoomIndex, roomDisplayName } from "./roomMatch";
 
 // Activity State
 export {

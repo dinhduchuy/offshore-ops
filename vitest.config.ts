@@ -5,7 +5,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
-    include: ["packages/*/src/**/*.test.ts"],
+    // packages/app has no src/: its pure modules (i18n, formatting, errors, rooms) are tested in place
+    include: ["packages/*/src/**/*.test.ts", "packages/app/lib/**/*.test.ts"],
     // Live-gateway tests need a running OpenClaw gateway; opt in with
     // DIORAMA_LIVE_TESTS=1.
     exclude: process.env.DIORAMA_LIVE_TESTS
@@ -18,6 +19,7 @@ export default defineConfig({
       "@diorama/plugins": path.resolve(__dirname, "packages/plugins/src"),
       "@diorama/cli": path.resolve(__dirname, "packages/cli/src"),
       "@diorama/ui": path.resolve(__dirname, "packages/ui/src"),
+      "@diorama/ops": path.resolve(__dirname, "packages/ops/src"),
       "@diorama/app": path.resolve(__dirname, "packages/app"),
     },
   },

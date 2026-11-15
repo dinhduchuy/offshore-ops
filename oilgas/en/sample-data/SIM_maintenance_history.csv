@@ -1,0 +1,5 @@
+# SIMULATED — illustrative data, not real figures
+wo_no,well,equipment_tag,system,wo_type,description,status,raised_date,due_date,closed_date
+WO-23990,A-03,GLV-A03-1850,Gas lift,CM,"Replace gas-lift valve at 1,850 m",Closed,2025-08-01,2025-08-24,2025-08-19
+WO-24811,A-03,FCV-A03-GL,Gas lift,PM,Recalibrate gas-lift control valve FCV-A03,Overdue,2026-09-18,2026-10-23,
+WO-24890,,K-100,Gas compression,CM,"Gas-lift compressor K-100 tripped for 2 h, restarted",Closed,2026-11-07,2026-11-07,2026-11-07

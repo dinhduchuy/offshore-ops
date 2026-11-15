@@ -12,6 +12,9 @@ const FurnitureItemSchema = z.object({
     wireframe: z.boolean().optional(),
     opacity: z.number().optional(),
   }),
+  /** GLB model path (served from /public) — mirrors FurnitureItem.glbPath */
+  glbPath: z.string().optional(),
+  glbScale: z.number().optional(),
 });
 
 const RoomColorsSchema = z.object({
@@ -20,14 +23,37 @@ const RoomColorsSchema = z.object({
   wall: z.string().optional(),
 });
 
+/**
+ * A door relative to its room: rx/ry are fractions of the room's width/height
+ * (0 = left/top edge, 1 = right/bottom edge); facing names the wall it sits in
+ * (0 = north, 90 = east, 180 = south, 270 = west).
+ */
+const RoomDoorSchema = z.object({
+  rx: z.number().min(0).max(1),
+  ry: z.number().min(0).max(1),
+  facing: z.union([z.literal(0), z.literal(90), z.literal(180), z.literal(270)]),
+});
+
 const RoomSchema = z.object({
   preset: z.string(),
   position: z.tuple([z.number(), z.number()]),
   size: z.tuple([z.number(), z.number()]),
   label: z.string(),
+  /**
+   * Human-readable name shown on the floor plan. Display only: `label` stays
+   * the technical key (zone ids, seat refs "label::index", allowedRooms, paths).
+   */
+  displayName: z.string().optional(),
+  /**
+   * Optional localized display names by interface language, e.g. { "vi": "Tài chính", "en": "Finance" }.
+   * Display only, like displayName. A user-chosen displayName without an entry here is shown as typed.
+   */
+  displayNames: z.record(z.string(), z.string()).optional(),
   colors: RoomColorsSchema.optional(),
   furniture: z.array(FurnitureItemSchema).optional(),
   floorStyle: z.enum(["solid", "grid-tiles", "wood-planks", "hex-tiles", "carpet"]).optional(),
+  /** Explicit doors — override the preset's default door(s) for walls + pathfinding. */
+  doors: z.array(RoomDoorSchema).optional(),
 });
 
 const AgentAssignmentSchema = z.object({

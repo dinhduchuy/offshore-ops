@@ -7,15 +7,21 @@ import type { DioramaConfig } from "@diorama/engine";
 import { TopBar } from "@/components/TopBar";
 import { Welcome } from "@/components/Welcome";
 import { useAttentionNotifications, type AttentionEntry } from "@/hooks/useAttentionNotifications";
+import { I18nProvider, useI18n } from "@/components/I18nProvider";
+
+function LoadingScene() {
+  const { t } = useI18n();
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+      <p style={{ color: "var(--ink-2)" }}>{t("shell.loadingOffice")}</p>
+    </div>
+  );
+}
 
 // Dynamic import to avoid SSR issues with Three.js
 const LiveView = dynamic(() => import("@/components/LiveView").then((m) => ({ default: m.LiveView })), {
   ssr: false,
-  loading: () => (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
-      <p style={{ color: "var(--ink-2)" }}>Loading 3D scene…</p>
-    </div>
-  ),
+  loading: () => <LoadingScene />,
 });
 
 const DashboardView = dynamic(
@@ -29,6 +35,15 @@ const BuilderSidebar = dynamic(
 );
 
 export default function Home() {
+  return (
+    <I18nProvider>
+      <HomeInner />
+    </I18nProvider>
+  );
+}
+
+function HomeInner() {
+  const { t, tr } = useI18n();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [config, setConfig] = useState<DioramaConfig | null>(null);
@@ -53,7 +68,7 @@ export default function Home() {
       <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         <TopBar />
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <p style={{ color: "var(--ink-2)" }} className="dio-pulse">Loading…</p>
+          <p style={{ color: "var(--ink-2)" }} className="dio-pulse">{t("common.loading")}</p>
         </div>
       </div>
     );
@@ -66,7 +81,7 @@ export default function Home() {
         <TopBar
           actions={
             <button onClick={() => router.push("/wizard")} className="dio-btn dio-btn-sm">
-              Open the wizard
+              {tr("Mở trình thiết kế", "Open the wizard")}
             </button>
           }
         />
@@ -115,7 +130,7 @@ export default function Home() {
                   transition: "background var(--t-fast) var(--ease), color var(--t-fast) var(--ease)",
                 }}
               >
-                {v === "3d-office" ? "Office" : "Dashboard"}
+                {v === "3d-office" ? t("shell.view.office") : t("shell.view.dashboard")}
               </button>
             ))}
           </div>
@@ -140,11 +155,11 @@ export default function Home() {
                 }}
               >
                 <span aria-hidden>✋</span>
-                {attention.length} need{attention.length === 1 ? "s" : ""} you
+                {t("attention.pill", { count: attention.length }).replace(/^✋\s*/, "")}
               </span>
             )}
             <button onClick={() => router.push("/wizard")} className="dio-btn dio-btn-ghost dio-btn-sm">
-              Redesign office
+              {t("shell.redesign")}
             </button>
           </>
         }
@@ -180,12 +195,12 @@ export default function Home() {
               }}
             >
               <span style={{ fontSize: 12, color: "var(--ink-2)" }}>
-                Get notified when an agent needs you
+                {tr("Nhận thông báo khi agent cần bạn", "Get notified when an agent needs you")}
               </span>
               <button className="dio-btn dio-btn-primary dio-btn-sm" onClick={enableNotifications}>
-                Enable
+                {tr("Bật", "Enable")}
               </button>
-              <button className="dio-btn dio-btn-ghost dio-btn-sm" onClick={dismissPrompt} aria-label="Dismiss notifications offer">
+              <button className="dio-btn dio-btn-ghost dio-btn-sm" onClick={dismissPrompt} aria-label={tr("Bỏ qua đề nghị thông báo", "Dismiss notifications offer")}>
                 ✕
               </button>
             </div>

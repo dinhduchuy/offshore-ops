@@ -222,3 +222,19 @@ describe("findRoomContaining", () => {
     expect(findRoomContaining(rooms, centerB[0], centerB[1])).toBe("B");
   });
 });
+
+describe("explicit room doors", () => {
+  it("room.doors overrides the preset's doors for connectivity", () => {
+    // Two stacked rooms: default south doors would never meet.
+    const top: RoomConfig = { preset: "lab", position: [0, 0], size: [2, 2], label: "Top", doors: [{ rx: 0.5, ry: 1, facing: 180 }] };
+    const bottom: RoomConfig = { preset: "lab", position: [0, 2], size: [2, 2], label: "Bottom", doors: [{ rx: 0.5, ry: 0, facing: 0 }] };
+    const graph = buildRoomGraph([top, bottom], ROOM_PRESETS);
+    expect(findRoomPath(graph, "Top", "Bottom")).toEqual(["Top", "Bottom"]);
+
+    const withoutOverride = buildRoomGraph(
+      [{ ...top, doors: undefined }, { ...bottom, doors: undefined }],
+      ROOM_PRESETS,
+    );
+    expect(findRoomPath(withoutOverride, "Top", "Bottom")).toEqual([]);
+  });
+});

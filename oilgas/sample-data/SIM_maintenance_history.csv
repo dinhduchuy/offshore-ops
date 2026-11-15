@@ -1,0 +1,8 @@
+# GIẢ LẬP / SIMULATED — dữ liệu minh họa, không phải số liệu thực
+wo_no,well,equipment_tag,system,wo_type,description,status,raised_date,due_date,closed_date
+WO-23990,A-03,GLV-A03-1850,Gas lift,CM,"Thay van gas lift độ sâu 1,850 m",Closed,2025-08-02,2025-08-25,2025-08-20
+WO-24533,,V-200-FT,Metering,PM,Hiệu chuẩn đồng hồ lỏng/khí bình tách thử V-200,Closed,2026-09-20,2026-10-10,2026-10-05
+WO-24702,A-01,FCV-A01-GL,Gas lift,PM,Hiệu chỉnh van điều khiển khí FCV-A01,Closed,2026-09-01,2026-10-01,2026-09-28
+WO-24811,A-03,FCV-A03-GL,Gas lift,PM,Hiệu chỉnh van điều khiển khí gas lift FCV-A03,Overdue,2026-09-15,2026-10-20,
+WO-24890,,K-100,Gas compression,CM,"Máy nén khí gas lift K-100 trip 2h, khởi động lại",Closed,2026-11-04,2026-11-04,2026-11-04
+WO-24901,A-05,ESP-A05,ESP,PM,Đo cách điện ESP A-05,Open,2026-11-01,2026-12-01,

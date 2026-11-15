@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20, 22]
+        # packages/ops uses node:sqlite (unflagged since Node 22.13): test the minimum and current LTS
+        node-version: ["22.13", "24"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -1,0 +1,4 @@
+# SIMULATED — illustrative data, not real figures
+contract_no,vendor,scope_categories,valid_from,valid_to,ceiling_usd,committed_usd
+SIM-C-2024-017,SIM Wireline Services Co.,slickline;wireline,2024-03-01,2028-02-27,2400000,1985000
+SIM-C-2025-044,SIM Lab Analytics,lab_analysis,2025-01-01,2027-12-29,150000,61000
