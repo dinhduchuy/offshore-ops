@@ -1,0 +1,17 @@
+Offshore Ops
+https://github.com/dinhduchuy/offshore-ops
+
+This product is a derivative of Diorama (diorama-builder)
+  Copyright (c) 2026 Hitesh Goyal
+  https://github.com/hitesh153/diorama-builder
+  Licensed under the MIT License (see LICENSE).
+
+It includes 3D models from the Kenney Furniture Kit
+  by Kenney - https://kenney.nl/assets/furniture-kit
+  Licensed CC0 1.0 Universal (public domain dedication).
+
+Third-party npm packages are listed with their versions in package-lock.json;
+their licenses ship with each package in node_modules/.
+
+All data sets in oilgas/ are SIMULATED. Names and codes are fictional and the
+configuration is a sample, not any company's policy or standard.
