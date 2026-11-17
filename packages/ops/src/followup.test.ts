@@ -8,9 +8,8 @@ import { hold, releaseOtherKeys, resourceUsage } from "./resources";
 import type { GateCondition, Identity } from "./types";
 
 /**
- * Regression tests for docs/reviews/2026-11-13-followup-review.md (H1–H4) and the
- * acceptance list of 2026-11-13-project-improvement-prompt.md. Temp databases,
- * pinned clock, simulated data — no network.
+ * Regression tests for the follow-up review findings (H1–H4) and the project
+ * acceptance list. Temp databases, pinned clock, simulated data — no network.
  */
 const SAMPLE = path.resolve(__dirname, "../../../oilgas/sample-data");
 const CONFIG = path.resolve(__dirname, "../../../oilgas/ops-config.json");

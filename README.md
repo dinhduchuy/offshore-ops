@@ -2,7 +2,7 @@
 
 **Offshore Ops** turns a production drop on an offshore well into a coordinated, traceable workflow, shown in a live 3D office.
 
-Department agents (Production Engineering, Maintenance, HSE, Contracts, Logistics, Finance) take their steps in order. When data is missing, they stop and ask for it. Every finding traces back to its calculation, the data row and the source file. People make the decisions.
+Department agents (Operations, Production Engineering, Maintenance, HSE, Contracts, Logistics, Finance) take their steps in order. When data is missing, they stop and ask for it. Every finding traces back to its calculation, the data row and the source file. People make the decisions.
 
 Open-source prototype on simulated data. Rule-based by default, LLM optional. Built on [Diorama](https://github.com/hitesh153/diorama-builder) by Hitesh Goyal (MIT).
 
@@ -11,7 +11,7 @@ Open-source prototype on simulated data. Rule-based by default, LLM optional. Bu
 
 **Offshore Ops** biến một sự cố suy giảm sản lượng giếng offshore thành một quy trình phối hợp có truy vết, hiển thị trong văn phòng 3D trực quan.
 
-Các agent phòng ban (Vận hành, Kỹ thuật sản xuất, Bảo dưỡng, HSE, Hợp đồng, Hậu cần, Tài chính) lần lượt nhận việc. Thiếu dữ liệu yêu cầu gửi bổ sung. Mọi kết luận đều truy ngược được về phép tính, dòng dữ liệu và file gốc. Con người đóng vai trò ra quyết định.
+Các agent phòng ban (Vận hành, Kỹ thuật khai thác, Bảo dưỡng, HSE, Hợp đồng, Hậu cần, Tài chính) lần lượt nhận việc. Thiếu dữ liệu thì dừng lại và yêu cầu bổ sung. Mọi kết luận đều truy ngược được về phép tính, dòng dữ liệu và file gốc. Con người đóng vai trò ra quyết định.
 
 Prototype mã nguồn mở, dùng dữ liệu giả lập. Mặc định chạy bằng quy tắc, LLM là tùy chọn. Xây dựng trên [Diorama](https://github.com/hitesh153/diorama-builder) của Hitesh Goyal (MIT).
 

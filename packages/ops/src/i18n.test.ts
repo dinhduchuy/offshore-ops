@@ -10,7 +10,7 @@ import type { LlmClient, LlmChatResult } from "./llm";
 import type { GateCondition, Identity } from "./types";
 
 /**
- * Bilingual support on the server side (docs/reviews/2026-11-14-bilingual-improvement-prompt.md):
+ * Bilingual support on the server side:
  * stable error codes + params, keyed trace/data-quality/event messages, LLM output language
  * snapshotted per run, and translations kept as a separate, traceable representation.
  * Temp databases, pinned clock, a local fake LLM client — no network, no billed call.

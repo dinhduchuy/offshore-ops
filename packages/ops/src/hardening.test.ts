@@ -10,8 +10,8 @@ import { rowInScope, type CaseScope } from "./caseModel";
 import type { ActiveRow } from "./datasets";
 
 /**
- * Regression tests for docs/reviews/2026-11-13-project-review.md (F1–F4) and the
- * mandatory acceptance list of 2026-11-13-project-improvement-prompt.md §5.
+ * Regression tests for the project review findings (F1–F4) and the mandatory
+ * acceptance list.
  * Temp databases, pinned clock, simulated data — no network.
  */
 const SAMPLE = path.resolve(__dirname, "../../../oilgas/sample-data");

@@ -12,7 +12,7 @@ const TEST_SERVICE: import("./types").Identity = { userId: "svc.test", name: "Te
 
 
 /**
- * Acceptance scenarios for workflow v2 (docs/reviews/2026-11-12-agent-workflow-improvement-prompt.md §8).
+ * Acceptance scenarios for workflow v2.
  * Separate temp databases, pinned clock, SIMULATED sample data — no network, no LLM.
  */
 const SAMPLE = path.resolve(__dirname, "../../../oilgas/sample-data");
