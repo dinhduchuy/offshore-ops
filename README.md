@@ -199,4 +199,4 @@ CI runs lint + typecheck + tests + build on Node 22.13 (minimum) and 24.
 
 ## License
 
-MIT. Original Diorama © 2026 Hitesh Goyal; see [LICENSE](LICENSE).
+MIT. Original Diorama © 2026 Hitesh Goyal; Offshore Ops additions © 2026 Dinh Duc Huy. See [LICENSE](LICENSE).
